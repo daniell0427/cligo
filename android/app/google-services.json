@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "91914151063",
+    "project_id": "cligo-app",
+    "storage_bucket": "cligo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91914151063:android:f5c418e9bab890c58d35d2",
+        "android_client_info": {
+          "package_name": "tech.cligo.cligo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91914151063-d0kk5r6l4lvr9hl1pps9it4mvj9qv4g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEFzzgb-R8I6y4UuLekfd2IguAZiToXuU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91914151063-d0kk5r6l4lvr9hl1pps9it4mvj9qv4g2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "91914151063-m4odfqs4lb1a65rv4i81j4qucjdsmsmd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "tech.cligo.cligo.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
