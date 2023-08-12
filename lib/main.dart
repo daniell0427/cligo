@@ -1,5 +1,6 @@
 import 'package:cligo/view/login_view.dart';
 import 'package:cligo/view/register_view.dart';
+import 'package:cligo/view/verify_email_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,6 +14,10 @@ void main() {
         // This is the theme of your application.
         primarySwatch: Colors.blue),
     home: const HomePage(),
+    routes: {
+      "/login/": (context) => const Login(),
+      "/register/": (context) => const Register()
+    },
   ));
 }
 
@@ -35,13 +40,16 @@ class HomePage extends StatelessWidget {
               {
                 final user = FirebaseAuth.instance.currentUser;
                 print(user);
-                final emailVerified = user?.emailVerified ?? false;
-                if (emailVerified == true) {
-                  print('Verified');
+                if (user != null) {
+                  if (user.emailVerified) {
+                    print('Email verified');
+                  } else {
+                    return const VerifyEmailView();
+                  }
                 } else {
-                  print('Not verified');
+                  return const Login();
                 }
-                return const Text('Done');
+                return const Text("Done");
               }
             default:
               return const Text('Loading..');
