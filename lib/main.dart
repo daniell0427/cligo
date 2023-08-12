@@ -1,4 +1,6 @@
+import 'package:cligo/view/home_view.dart';
 import 'package:cligo/view/login_view.dart';
+import 'package:cligo/view/profile_view.dart';
 import 'package:cligo/view/register_view.dart';
 import 'package:cligo/view/verify_email_view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,7 +18,9 @@ void main() {
     home: const HomePage(),
     routes: {
       "/login/": (context) => const Login(),
-      "/register/": (context) => const Register()
+      "/register/": (context) => const Register(),
+      "/home/": (context) => const HomeView(),
+      "/profile/": (context) => const ProfileView()
     },
   ));
 }
@@ -26,36 +30,29 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Page'),
+    return FutureBuilder(
+      future: Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
       ),
-      body: FutureBuilder(
-        future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        ),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
-              {
-                final user = FirebaseAuth.instance.currentUser;
-                print(user);
-                if (user != null) {
-                  if (user.emailVerified) {
-                    print('Email verified');
-                  } else {
-                    return const VerifyEmailView();
-                  }
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.done:
+            {
+              final user = FirebaseAuth.instance.currentUser;
+              if (user != null) {
+                if (user.emailVerified) {
+                  return const HomeView();
                 } else {
-                  return const Login();
+                  return const VerifyEmailView();
                 }
-                return const Text("Done");
+              } else {
+                return const Login();
               }
-            default:
-              return const Text('Loading..');
-          }
-        },
-      ),
+            }
+          default:
+            return const CircularProgressIndicator();
+        }
+      },
     );
   }
 }
