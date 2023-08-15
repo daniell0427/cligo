@@ -1,4 +1,5 @@
-import 'package:cligo/view/home_view.dart';
+import 'package:cligo/constants/routes.dart';
+import 'package:cligo/view/home_template.dart';
 import 'package:cligo/view/login_view.dart';
 import 'package:cligo/view/profile_view.dart';
 import 'package:cligo/view/register_view.dart';
@@ -7,26 +8,32 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
+import 'package:flutter/services.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MaterialApp(
-    title: 'Flutter Demo',
-    theme: ThemeData(
-        // This is the theme of your application.
-        primarySwatch: Colors.blue),
-    home: const HomePage(),
-    routes: {
-      "/login/": (context) => const Login(),
-      "/register/": (context) => const Register(),
-      "/home/": (context) => const HomeView(),
-      "/profile/": (context) => const ProfileView()
-    },
-  ));
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+  runApp(
+    MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+          // This is the theme of your application.
+          primarySwatch: Colors.blue),
+      home: const LayoutPage(),
+      routes: {
+        loginRoute: (context) => const Login(),
+        registerRoute: (context) => const Register(),
+        homeRoute: (context) => const HomeView(),
+        profileRoute: (context) => const ProfileView()
+      },
+    ),
+  );
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class LayoutPage extends StatelessWidget {
+  const LayoutPage({super.key});
 
   @override
   Widget build(BuildContext context) {

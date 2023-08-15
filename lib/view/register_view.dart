@@ -1,5 +1,7 @@
+import 'package:cligo/constants/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'dart:developer' as devtools show log;
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -29,38 +31,91 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Register'),
-      ),
-      body: Column(
-        children: [
-          TextField(
-            controller: _email,
-            autocorrect: false,
-            enableSuggestions: false,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(hintText: "Put your email here:"),
-          ),
-          TextField(
-            controller: _password,
-            obscureText: true,
-            autocorrect: false,
-            enableSuggestions: false,
-            decoration:
-                const InputDecoration(hintText: "Put your password here:"),
-          ),
-          TextButton(
-            onPressed: () async {
-              final email = _email.text;
-              final password = _password.text;
-              final userCredentials = await FirebaseAuth.instance
-                  .createUserWithEmailAndPassword(
-                      email: email, password: password);
-              print(userCredentials);
-            },
-            child: const Text('Register'),
-          ),
-        ],
+      backgroundColor: Colors.black,
+      body: Padding(
+        padding: const EdgeInsets.all(50),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(bottom: 15.0, right: 125),
+              child: Text(
+                'Register',
+                style: TextStyle(
+                  fontSize: 45,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            TextField(
+              style: const TextStyle(color: Colors.white),
+              controller: _email,
+              autocorrect: false,
+              enableSuggestions: false,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white)),
+                labelText: 'Email',
+                labelStyle: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: TextField(
+                style: const TextStyle(color: Colors.white),
+                controller: _password,
+                obscureText: true,
+                autocorrect: false,
+                enableSuggestions: false,
+                decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white)),
+                  labelText: 'Password',
+                  labelStyle: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () async {
+                final email = _email.text;
+                final password = _password.text;
+                final userCredentials =
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                  email: email,
+                  password: password,
+                );
+                devtools.log(userCredentials.toString());
+              },
+              child: const Text('Register'),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Are you already registered?',
+                  style: TextStyle(color: Colors.white),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      loginRoute,
+                      (route) => false,
+                    );
+                  },
+                  child: const Text('Login here'),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,77 +1,72 @@
-import 'package:cligo/view/login_view.dart';
-import 'package:cligo/view/profile_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as devtools show log;
+import 'package:searchfield/searchfield.dart';
+import '../constants/list_of_countries_and_cities.dart' as mylist;
+import '../features/searchfield_make_list.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+final _formKey = GlobalKey<FormState>();
 
-  @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-enum NavAction { logout }
-
-class _HomeViewState extends State<HomeView> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('UI'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/profile/');
-              },
-              icon: const Icon(Icons.person)),
-          PopupMenuButton<NavAction>(
-            icon: const Icon(Icons.settings),
-            onSelected: (value) async {
-              switch (value) {
-                case NavAction.logout:
-                  final shouldLogout = await showLogoutDialog(context);
-                  if (shouldLogout) {
-                    FirebaseAuth.instance.signOut();
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/login/', (_) => false);
-                  }
+final homeView = Padding(
+  padding: const EdgeInsets.all(5.0),
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Form(
+        key: _formKey,
+        child: SizedBox(
+          width: 150,
+          height: 40,
+          child: SearchField(
+            suggestions: makeSearchFieldList(mylist.countries),
+            validator: (x) {
+              if (!mylist.countries.contains(x) || x!.isEmpty) {
+                return 'Please Enter a valid State';
               }
+              return null;
             },
-            itemBuilder: (context) {
-              return const [
-                PopupMenuItem<NavAction>(
-                    value: NavAction.logout, child: Text('Log out'))
-              ];
-            },
-          )
-        ],
+            maxSuggestionsInViewPort: 6,
+            suggestionState: Suggestion.expand,
+            searchInputDecoration: const InputDecoration(
+              filled: true,
+              fillColor: Color.fromARGB(122, 57, 57, 57),
+              hintText: 'Caută..',
+              hintStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                height: BorderSide.strokeAlignOutside,
+              ),
+              labelText: 'Countries',
+              labelStyle: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 15,
+                  color: Colors.white),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10.0),
+                ),
+                borderSide: BorderSide(
+                  color: Colors.white,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.white,
+                ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15.0),
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
-      body: const Text('Hi there'),
-    );
-  }
-}
-
-Future<bool> showLogoutDialog(BuildContext context) {
-  return showDialog<bool>(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('Logout'),
-        content: const Text('Are you sure you want to log out?'),
-        actions: [
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context, false);
-              },
-              child: const Text('Cancel')),
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context, true);
-              },
-              child: const Text('Logout')),
-        ],
-      );
-    },
-  ).then((value) => value ?? false);
-}
+      ElevatedButton(
+        onPressed: () {
+          if (_formKey.currentState!.validate()) {
+            print('alright');
+          }
+        },
+        child: const Text('Submit'),
+      )
+    ],
+  ),
+);
