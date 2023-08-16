@@ -1,10 +1,5 @@
-import 'package:cligo/features/searchfield_make_list.dart';
-import 'package:cligo/view/home_template.dart';
 import 'package:cligo/view/home_view.dart';
 import 'package:flutter/material.dart';
-import 'package:searchfield/searchfield.dart';
-
-import '../constants/list_of_countries_and_cities.dart' as mylist;
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -14,22 +9,8 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  late final TextEditingController _country;
-
-  @override
-  void initState() {
-    _country = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _country.dispose();
-    super.dispose();
-  }
-
   final pages = [
-    homeView,
+    const HomeView(),
     const Text('Add'),
     const Text('Chat'),
   ];
@@ -39,7 +20,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: pages[_curentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,

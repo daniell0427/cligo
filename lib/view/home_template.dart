@@ -18,44 +18,46 @@ class HomeView extends StatefulWidget {
 enum NavAction { logout }
 
 class _HomeViewState extends State<HomeView> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.indigoAccent,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, profileRoute);
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.indigoAccent,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, profileRoute);
+                },
+                icon: Image.asset(defaultAvatar)),
+            PopupMenuButton<NavAction>(
+              icon: const Icon(Icons.settings),
+              onSelected: (value) async {
+                switch (value) {
+                  case NavAction.logout:
+                    final shouldLogout =
+                        await features.showLogoutDialog(context);
+                    if (shouldLogout) {
+                      FirebaseAuth.instance.signOut();
+                      Navigator.of(context)
+                          .pushNamedAndRemoveUntil(loginRoute, (_) => false);
+                    }
+                }
               },
-              icon: Image.asset(defaultAvatar)),
-          PopupMenuButton<NavAction>(
-            icon: const Icon(Icons.settings),
-            onSelected: (value) async {
-              switch (value) {
-                case NavAction.logout:
-                  final shouldLogout = await features.showLogoutDialog(context);
-                  if (shouldLogout) {
-                    FirebaseAuth.instance.signOut();
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil(loginRoute, (_) => false);
-                  }
-              }
-            },
-            itemBuilder: (context) {
-              return const [
-                PopupMenuItem<NavAction>(
-                    value: NavAction.logout, child: Text('Log out'))
-              ];
-            },
-          )
-        ],
-      ),
-      body:  
-      const features.BottomNavigation(),
-    );
+              itemBuilder: (context) {
+                return const [
+                  PopupMenuItem<NavAction>(
+                      value: NavAction.logout, child: Text('Log out'))
+                ];
+              },
+            )
+          ],
+        ),
+        body: GestureDetector(
+          child: const features.BottomNavigation(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+        ));
   }
 }
