@@ -1,6 +1,6 @@
 # cligo
 
-A new Flutter project.
+Danu coding goes round and round. The Danu coding goes round and round
 
 ## Getting Started
 
