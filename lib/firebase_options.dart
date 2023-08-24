@@ -44,40 +44,39 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB3CdcxO8VZ5vqkjNPh7LFg4amAiyfxElg',
-    appId: '1:91914151063:web:b52cc084890d7ffc8d35d2',
-    messagingSenderId: '91914151063',
-    projectId: 'cligo-app',
-    authDomain: 'cligo-app.firebaseapp.com',
-    storageBucket: 'cligo-app.appspot.com',
-    measurementId: 'G-GT296XXCRB',
+    apiKey: 'AIzaSyDxtt0KAWckiJX8PElnnnKxTyFq-YO04ng',
+    appId: '1:66077266094:web:c942201f9838fc7d5f9d3f',
+    messagingSenderId: '66077266094',
+    projectId: 'cligo-app-travel',
+    authDomain: 'cligo-app-travel.firebaseapp.com',
+    storageBucket: 'cligo-app-travel.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCEFzzgb-R8I6y4UuLekfd2IguAZiToXuU',
-    appId: '1:91914151063:android:f5c418e9bab890c58d35d2',
-    messagingSenderId: '91914151063',
-    projectId: 'cligo-app',
-    storageBucket: 'cligo-app.appspot.com',
+    apiKey: 'AIzaSyBWBUVEtLDtbESxQDvFxQj-1gLdi65quzA',
+    appId: '1:66077266094:android:0f7b6fc6f6563f255f9d3f',
+    messagingSenderId: '66077266094',
+    projectId: 'cligo-app-travel',
+    storageBucket: 'cligo-app-travel.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBTAn0aKLiXtjipOG0ytNI6T1PEP0DnkFA',
-    appId: '1:91914151063:ios:6c453e853141dfff8d35d2',
-    messagingSenderId: '91914151063',
-    projectId: 'cligo-app',
-    storageBucket: 'cligo-app.appspot.com',
-    iosClientId: '91914151063-ovlcb8a8cd3fdc0g9atmdti9k98lt8di.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDTdTj6xiwD3SF-YNQDYWfRdmw53140Mnk',
+    appId: '1:66077266094:ios:d18efe4428cbf45d5f9d3f',
+    messagingSenderId: '66077266094',
+    projectId: 'cligo-app-travel',
+    storageBucket: 'cligo-app-travel.appspot.com',
+    iosClientId: '66077266094-8rhv2s8rqmf7f8ksgo5enliklu8rgh9k.apps.googleusercontent.com',
     iosBundleId: 'tech.cligo.cligo',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBTAn0aKLiXtjipOG0ytNI6T1PEP0DnkFA',
-    appId: '1:91914151063:ios:741f5d9263d7179b8d35d2',
-    messagingSenderId: '91914151063',
-    projectId: 'cligo-app',
-    storageBucket: 'cligo-app.appspot.com',
-    iosClientId: '91914151063-m4odfqs4lb1a65rv4i81j4qucjdsmsmd.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDTdTj6xiwD3SF-YNQDYWfRdmw53140Mnk',
+    appId: '1:66077266094:ios:31de99263aa79ab45f9d3f',
+    messagingSenderId: '66077266094',
+    projectId: 'cligo-app-travel',
+    storageBucket: 'cligo-app-travel.appspot.com',
+    iosClientId: '66077266094-7c5f79rq3id1b5ff3bt8po9qnlgfr23c.apps.googleusercontent.com',
     iosBundleId: 'tech.cligo.cligo.RunnerTests',
   );
 }

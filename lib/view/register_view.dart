@@ -13,11 +13,13 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   late final TextEditingController _email;
   late final TextEditingController _password;
+  late final TextEditingController _name;
 
   @override
   void initState() {
     _email = TextEditingController();
     _password = TextEditingController();
+    _name = TextEditingController();
     super.initState();
   }
 
@@ -25,6 +27,7 @@ class _RegisterState extends State<Register> {
   void dispose() {
     _email.dispose();
     _password.dispose();
+    _name.dispose();
     super.dispose();
   }
 
@@ -38,9 +41,11 @@ class _RegisterState extends State<Register> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Padding(
-              padding: EdgeInsets.only(bottom: 15.0, right: 125),
+              padding: EdgeInsets.only(
+                bottom: 15.0,
+              ),
               child: Text(
-                'Register',
+                'Înregistrare',
                 style: TextStyle(
                   fontSize: 45,
                   color: Colors.white,
@@ -49,18 +54,40 @@ class _RegisterState extends State<Register> {
             ),
             TextField(
               style: const TextStyle(color: Colors.white),
-              controller: _email,
+              controller: _name,
               autocorrect: false,
-              enableSuggestions: false,
-              keyboardType: TextInputType.emailAddress,
+              enableSuggestions: true,
               decoration: const InputDecoration(
+                hintText: 'ex: Artene Alex',
+                hintStyle: TextStyle(color: Colors.grey),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white),
                 ),
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white)),
-                labelText: 'Email',
+                labelText: 'Nume',
                 labelStyle: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: TextField(
+                style: const TextStyle(color: Colors.white),
+                controller: _email,
+                autocorrect: false,
+                enableSuggestions: false,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  hintText: 'example@gmail.com',
+                  hintStyle: TextStyle(color: Colors.grey),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white)),
+                  labelText: 'Email',
+                  labelStyle: TextStyle(fontSize: 20, color: Colors.white),
+                ),
               ),
             ),
             Padding(
@@ -77,7 +104,7 @@ class _RegisterState extends State<Register> {
                   ),
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white)),
-                  labelText: 'Password',
+                  labelText: 'Parola',
                   labelStyle: TextStyle(fontSize: 20, color: Colors.white),
                 ),
               ),
@@ -92,14 +119,20 @@ class _RegisterState extends State<Register> {
                   password: password,
                 );
                 devtools.log(userCredentials.toString());
+                final user = FirebaseAuth.instance.currentUser;
+                user?.sendEmailVerification();
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  verifyEmailRoute,
+                  (route) => false,
+                );
               },
-              child: const Text('Register'),
+              child: const Text('Înregistrează-te'),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Are you already registered?',
+                  'Ești deja înregistrat?',
                   style: TextStyle(color: Colors.white),
                 ),
                 TextButton(
@@ -109,8 +142,9 @@ class _RegisterState extends State<Register> {
                       loginRoute,
                       (route) => false,
                     );
+                    
                   },
-                  child: const Text('Login here'),
+                  child: const Text('Autentifică-te'),
                 )
               ],
             ),

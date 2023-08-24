@@ -1,4 +1,6 @@
+import 'package:cligo/view/add_view.dart';
 import 'package:cligo/view/home_view.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -11,7 +13,7 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   final pages = [
     const HomeView(),
-    const Text('Add'),
+    const AddView(),
     const Text('Chat'),
   ];
 

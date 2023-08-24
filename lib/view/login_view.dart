@@ -118,18 +118,28 @@ class _LoginState extends State<Login> {
                         email: email,
                         password: password,
                       );
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        homeRoute,
-                        (_) => false,
-                      );
+                      final user = FirebaseAuth.instance.currentUser;
+                      if (user?.emailVerified ?? false) {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          homeRoute,
+                          (_) => false,
+                        );
+                      } else {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          verifyEmailRoute,
+                          (_) => false,
+                        );
+                      }
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'user-not-found') {
                         devtools.log('User not found');
                       } else if (e.code == 'wrong-password') {
                         devtools.log('Wrong password');
                       } else {
-                        devtools.log('Something unexpected happened');
+                        devtools.log(
+                            'Something unexpected happened: Error: ${e.code}');
                       }
                     }
                   },

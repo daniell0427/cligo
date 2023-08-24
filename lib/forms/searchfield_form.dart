@@ -14,9 +14,10 @@ searchfieldForm(controllerValue, formkey, myLabelText) {
         searchStyle: const TextStyle(color: Colors.white),
         suggestions: makeSearchFieldList(mylist.cities),
         suggestionStyle: const TextStyle(),
+        //validates the suggestion
         validator: (x) {
-          if (!mylist.cities.values.elementAt(0).contains(x) ||
-              mylist.cities.values.elementAt(1).contains(x) ||
+          if (!mylist.cities.values.elementAt(0).contains(x) &&
+                  !mylist.cities.values.elementAt(1).contains(x) ||
               x!.isEmpty) {
             return 'Introduceți o locație valabilă!';
           }
@@ -53,24 +54,6 @@ searchfieldForm(controllerValue, formkey, myLabelText) {
               Radius.circular(0.0),
             ),
           ),
-        ),
-      ),
-    ),
-  );
-}
-
-searchfieldButton(formKey1, formKey2) {
-  return SizedBox(
-    width: 150,
-    child: ElevatedButton(
-      onPressed: () {
-        if (formKey1.currentState!.validate()) {}
-        if (formKey2.currentState!.validate()) {}
-      },
-      child: const Text(
-        'Submit',
-        style: TextStyle(
-          fontSize: 20,
         ),
       ),
     ),
