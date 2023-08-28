@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:cligo/constants/colors.dart';
 
-class calatorieItem extends StatefulWidget {
-  const calatorieItem({Key? key}) : super(key: key);
+class CalatorieItem extends StatefulWidget {
+  const CalatorieItem({Key? key}) : super(key: key);
 
   @override
-  State<calatorieItem> createState() => _calatorieItemState();
+  State<CalatorieItem> createState() => _CalatorieItemState();
 }
 
-class _calatorieItemState extends State<calatorieItem> {
+class _CalatorieItemState extends State<CalatorieItem> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -68,7 +68,7 @@ class _calatorieItemState extends State<calatorieItem> {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Column(
@@ -87,11 +87,11 @@ class _calatorieItemState extends State<calatorieItem> {
                     ),
                   ),
                 ),
-                Text('2 locuri',
+                const Text('2 locuri',
                     style: TextStyle(fontSize: 16, color: Pallete.textColor)),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             const Align(
