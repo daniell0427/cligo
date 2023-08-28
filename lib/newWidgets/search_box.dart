@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../features/searchfield_form_button.dart';
 import '../forms/nr_persoane.dart';
 import '../forms/search_data.dart';
 import '../forms/searchfield_form.dart';
@@ -53,36 +54,50 @@ class _SearchBoxState extends State<SearchBox> {
                 width: 2,
               )),
           padding: const EdgeInsets.all(10),
-          child: Column(children: [
-            //start location form
-            searchfieldForm(_startLocation, _formKey1, 'Locația'),
-            const SizedBox(
-              height: 10,
-            ),
+          child: Column(
+            children: [
+              //start location form
+              searchfieldForm(_startLocation, _formKey1, 'Locația'),
+              const SizedBox(
+                height: 10,
+              ),
 
-            //end location form
-            searchfieldForm(_endLocation, _formKey2, 'Destinația'),
-            const SizedBox(
-              height: 10,
-            ),
-            const Row(
-              children: [
-                //search data form
-                Expanded(flex: 1, child: SearchData()),
-                SizedBox(
-                  width: 10,
+              //end location form
+              searchfieldForm(_endLocation, _formKey2, 'Destinația'),
+              const SizedBox(
+                height: 10,
+              ),
+              const Row(
+                children: [
+                  //search data form
+                  Expanded(flex: 1, child: SearchData()),
+                  SizedBox(
+                    width: 10,
+                  ),
+
+                  //numar persoane form
+                  Expanded(flex: 1, child: NrPersoane()),
+                ],
+              ),
+              const SizedBox(height: 10),
+
+              //searchfield button
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: SearchfieldButton(
+                  formKey1: _formKey1,
+                  formKey2: _formKey2,
+                  locationController: _startLocation,
+                  destinationController: _endLocation,
+                  dateController: _dateinput,
+                  seatsController: _availableSeats,
+                  textLabel: 'Caută',
+                  functionName: 'takeFromDatabase',
                 ),
-
-                //numar persoane form
-                Expanded(flex: 1, child: NrPersoane()),
-              ],
-            ),
-            const SizedBox(height: 10),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [],
-            )
-          ]),
+              )
+              //end searchfield button
+            ],
+          ),
         ),
       ),
     );

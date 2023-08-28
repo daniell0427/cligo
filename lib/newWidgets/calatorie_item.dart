@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:cligo/constants/colors.dart';
 
-class CalatorieItem extends StatefulWidget {
-  const CalatorieItem({Key? key}) : super(key: key);
+class calatorieItem extends StatefulWidget {
+  const calatorieItem({Key? key}) : super(key: key);
 
   @override
-  State<CalatorieItem> createState() => _CalatorieItemState();
+  State<calatorieItem> createState() => _calatorieItemState();
 }
 
-class _CalatorieItemState extends State<CalatorieItem> {
+class _calatorieItemState extends State<calatorieItem> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
