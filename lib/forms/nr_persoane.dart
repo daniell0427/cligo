@@ -2,14 +2,14 @@ import 'package:cligo/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class nrPersoane extends StatefulWidget {
-  const nrPersoane({super.key});
+class NrPersoane extends StatefulWidget {
+  const NrPersoane({super.key});
 
   @override
-  State<nrPersoane> createState() => _nrPersoaneState();
+  State<NrPersoane> createState() => _NrPersoaneState();
 }
 
-class _nrPersoaneState extends State<nrPersoane> {
+class _NrPersoaneState extends State<NrPersoane> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +24,7 @@ class _nrPersoaneState extends State<nrPersoane> {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: TextFormField(
-        style: TextStyle(fontSize: 25, color: Pallete.textColor),
+        style: const TextStyle(fontSize: 25, color: Pallete.textColor),
         keyboardType: TextInputType.number,
         inputFormatters: <TextInputFormatter>[
           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -37,7 +37,7 @@ class _nrPersoaneState extends State<nrPersoane> {
             size: 30,
           ),
           labelText: 'locuri',
-          labelStyle: TextStyle(color: Colors.white),
+          labelStyle: const TextStyle(color: Colors.white),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(

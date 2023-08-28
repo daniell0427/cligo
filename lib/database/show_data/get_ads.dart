@@ -5,7 +5,10 @@ import 'package:flutter/widgets.dart';
 class ShowRoutes extends StatelessWidget {
   final String docId;
 
-  ShowRoutes({required this.docId});
+  const ShowRoutes({
+    super.key,
+    required this.docId,
+  });
 
   @override
   Widget build(BuildContext context) {

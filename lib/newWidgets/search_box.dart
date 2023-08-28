@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../forms/nr_persoane.dart';
+import '../forms/search_data.dart';
 import '../forms/searchfield_form.dart';
 
-class searchBox extends StatefulWidget {
-  searchBox({super.key});
+class SearchBox extends StatefulWidget {
+  const SearchBox({super.key});
 
   @override
-  State<searchBox> createState() => _searchBoxState();
+  State<SearchBox> createState() => _SearchBoxState();
+}
 
+class _SearchBoxState extends State<SearchBox> {
   late final TextEditingController _startLocation;
   late final TextEditingController _endLocation;
   late final TextEditingController _dateinput;
@@ -34,9 +38,7 @@ class searchBox extends StatefulWidget {
 
   final _formKey1 = GlobalKey<FormState>();
   final _formKey2 = GlobalKey<FormState>();
-}
 
-class _searchBoxState extends State<searchBox> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -50,27 +52,33 @@ class _searchBoxState extends State<searchBox> {
                 color: Colors.white60,
                 width: 2,
               )),
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(children: [
+            //start location form
             searchfieldForm(_startLocation, _formKey1, 'Locația'),
             const SizedBox(
               height: 10,
-            ), // * for padding
+            ),
+
+            //end location form
             searchfieldForm(_endLocation, _formKey2, 'Destinația'),
             const SizedBox(
               height: 10,
-            ), // * for padding
-            Row(
+            ),
+            const Row(
               children: [
-                Expanded(flex: 1, child: searchData()),
-                const SizedBox(
+                //search data form
+                Expanded(flex: 1, child: SearchData()),
+                SizedBox(
                   width: 10,
-                ), // * for padding
-                Expanded(flex: 1, child: nrPersoane()),
+                ),
+
+                //numar persoane form
+                Expanded(flex: 1, child: NrPersoane()),
               ],
             ),
-            SizedBox(height: 10), // * for padding
-            Row(
+            const SizedBox(height: 10),
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [],
             )

@@ -2,14 +2,14 @@ import 'package:cligo/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class searchData extends StatefulWidget {
-  const searchData({super.key});
+class SearchData extends StatefulWidget {
+  const SearchData({super.key});
 
   @override
-  State<searchData> createState() => _searchDataState();
+  State<SearchData> createState() => _SearchDataState();
 }
 
-class _searchDataState extends State<searchData> {
+class _SearchDataState extends State<SearchData> {
   DateTime dateTime = DateTime(2022, 12, 25);
   final TextEditingController _date = TextEditingController();
   @override
@@ -27,14 +27,14 @@ class _searchDataState extends State<searchData> {
       ),
       child: TextFormField(
         controller: _date,
-        style: TextStyle(fontSize: 25, color: Pallete.textColor),
+        style: const TextStyle(fontSize: 25, color: Pallete.textColor),
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.calendar_today_rounded),
+          prefixIcon: const Icon(Icons.calendar_today_rounded),
           prefixIconColor: Colors.white,
           hintText: 'aa-ll-zz',
-          hintStyle: TextStyle(color: Colors.white38),
+          hintStyle: const TextStyle(color: Colors.white38),
           labelText: 'data',
-          labelStyle: TextStyle(color: Colors.white),
+          labelStyle: const TextStyle(color: Colors.white),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(

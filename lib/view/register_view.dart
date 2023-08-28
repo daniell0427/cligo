@@ -11,8 +11,10 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  //controllers
   late final TextEditingController _email;
   late final TextEditingController _password;
+  late final TextEditingController _confirmPassword;
   late final TextEditingController _name;
 
   @override
@@ -20,6 +22,7 @@ class _RegisterState extends State<Register> {
     _email = TextEditingController();
     _password = TextEditingController();
     _name = TextEditingController();
+    _confirmPassword = TextEditingController();
     super.initState();
   }
 
@@ -28,6 +31,7 @@ class _RegisterState extends State<Register> {
     _email.dispose();
     _password.dispose();
     _name.dispose();
+    _confirmPassword.dispose();
     super.dispose();
   }
 
@@ -40,6 +44,7 @@ class _RegisterState extends State<Register> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            //Title
             const Padding(
               padding: EdgeInsets.only(
                 bottom: 15.0,
@@ -52,6 +57,8 @@ class _RegisterState extends State<Register> {
                 ),
               ),
             ),
+
+            //Name textfield
             TextField(
               style: const TextStyle(color: Colors.white),
               controller: _name,
@@ -69,6 +76,8 @@ class _RegisterState extends State<Register> {
                 labelStyle: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
+
+            //Email Textfield
             Padding(
               padding: const EdgeInsets.only(top: 15),
               child: TextField(
@@ -90,6 +99,8 @@ class _RegisterState extends State<Register> {
                 ),
               ),
             ),
+
+            //password textfield
             Padding(
               padding: const EdgeInsets.only(top: 15),
               child: TextField(
@@ -109,22 +120,52 @@ class _RegisterState extends State<Register> {
                 ),
               ),
             ),
+
+            //confirm password textfield
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: TextField(
+                style: const TextStyle(color: Colors.white),
+                controller: _confirmPassword,
+                obscureText: true,
+                autocorrect: false,
+                enableSuggestions: false,
+                decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white)),
+                  labelText: 'Confirmă Parola',
+                  labelStyle: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+              ),
+            ),
+
+            //Button
             TextButton(
               onPressed: () async {
                 final email = _email.text;
                 final password = _password.text;
-                final userCredentials =
-                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                  email: email,
-                  password: password,
-                );
-                devtools.log(userCredentials.toString());
-                final user = FirebaseAuth.instance.currentUser;
-                user?.sendEmailVerification();
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  verifyEmailRoute,
-                  (route) => false,
-                );
+                final confirmPassword = _confirmPassword.text;
+                if (password == confirmPassword) {
+                  final userCredentials = await FirebaseAuth.instance
+                      .createUserWithEmailAndPassword(
+                    email: email,
+                    password: password,
+                  );
+                  devtools.log(userCredentials.toString());
+                  final user = FirebaseAuth.instance.currentUser;
+                  user?.sendEmailVerification();
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    verifyEmailRoute,
+                    (route) => false,
+                  );
+                } else {
+                  print('Parola incorecta');
+                  _password.clear();
+                  _confirmPassword.clear();
+                }
               },
               child: const Text('Înregistrează-te'),
             ),
@@ -142,7 +183,6 @@ class _RegisterState extends State<Register> {
                       loginRoute,
                       (route) => false,
                     );
-                    
                   },
                   child: const Text('Autentifică-te'),
                 )
