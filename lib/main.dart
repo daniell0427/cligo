@@ -1,4 +1,5 @@
 import 'package:cligo/constants/routes.dart';
+import 'package:cligo/view/greetings_view.dart';
 import 'package:cligo/view/home_template.dart';
 import 'package:cligo/view/login_view.dart';
 import 'package:cligo/view/profile_view.dart';
@@ -26,7 +27,8 @@ void main() async {
         loginRoute: (context) => const Login(),
         registerRoute: (context) => const Register(),
         homeRoute: (context) => const HomeView(),
-        profileRoute: (context) => const ProfileView()
+        profileRoute: (context) => const ProfileView(),
+        verifyEmailRoute: (context) => const VerifyEmailView(),
       },
     ),
   );
@@ -34,7 +36,6 @@ void main() async {
 
 class LayoutPage extends StatelessWidget {
   const LayoutPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -48,12 +49,27 @@ class LayoutPage extends StatelessWidget {
               final user = FirebaseAuth.instance.currentUser;
               if (user != null) {
                 if (user.emailVerified) {
-                  return const HomeView();
+                  return GestureDetector(
+                    child: const HomeView(),
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                    },
+                  );
                 } else {
-                  return const VerifyEmailView();
+                  return GestureDetector(
+                    child: const Register(),
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                    },
+                  );
                 }
               } else {
-                return const Login();
+                return GestureDetector(
+                  child: const GreetingView(),
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                  },
+                );
               }
             }
           default:

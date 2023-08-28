@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:91914151063:ios:6c453e853141dfff8d35d2",
-  "FIREBASE_PROJECT_ID": "cligo-app",
-  "GCM_SENDER_ID": "91914151063"
+  "GOOGLE_APP_ID": "1:66077266094:ios:d18efe4428cbf45d5f9d3f",
+  "FIREBASE_PROJECT_ID": "cligo-app-travel",
+  "GCM_SENDER_ID": "66077266094"
 }

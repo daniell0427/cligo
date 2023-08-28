@@ -1,4 +1,3 @@
-import 'package:cligo/database/functions/get_ads_id.dart';
 import 'package:cligo/forms/searchfield_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,14 +5,14 @@ import 'package:intl/intl.dart';
 
 import '../features/searchfield_form_button.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+class AddView extends StatefulWidget {
+  const AddView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<AddView> createState() => _AddViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _AddViewState extends State<AddView> {
   late final TextEditingController _startLocation;
   late final TextEditingController _endLocation;
   late final TextEditingController _dateinput;
@@ -178,8 +177,8 @@ class _HomeViewState extends State<HomeView> {
               destinationController: _endLocation,
               dateController: _dateinput,
               seatsController: _availableSeats,
-              textLabel: 'Caută',
-              functionName: 'takeFromDatabase',
+              textLabel: 'Adaugă',
+              functionName: 'pushToDatabase',
             ),
           )
           //end searchfield button
