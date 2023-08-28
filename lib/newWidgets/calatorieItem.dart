@@ -44,7 +44,7 @@ class _calatorieItemState extends State<calatorieItem> {
                       radius: 25,
                       backgroundColor: Color.fromARGB(255, 200, 200, 200),
                       backgroundImage:
-                          AssetImage('lib/assets/default_avatar.png'),
+                          AssetImage('lib/assets/images/default_avatar.png'),
                     ),
                   ),
                 ),
