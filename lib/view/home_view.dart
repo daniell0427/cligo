@@ -11,6 +11,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
@@ -26,15 +27,15 @@ class _HomeViewState extends State<HomeView> {
                 child: FittedBox(
                   child: Column(
                     children: [
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
+                      calatorieItem(),
+                      calatorieItem(),
+                      calatorieItem(),
+                      calatorieItem(),
+                      calatorieItem(),
+                      calatorieItem(),
+                      calatorieItem(),
+                      calatorieItem(),
+                      calatorieItem(),
                     ],
                   ),
                 ),
