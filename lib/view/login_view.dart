@@ -54,6 +54,11 @@ class _LoginState extends State<Login> {
               enableSuggestions: false,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
+                prefixIcon: Icon(
+                  Icons.person,
+                  color: Colors.black,
+                  size: 30,
+                ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.white,

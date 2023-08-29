@@ -1,5 +1,6 @@
 import 'package:cligo/database/read_data/user_advertisment.dart';
 import 'package:flutter/material.dart';
+import 'package:cligo/constants/colors.dart';
 
 class SearchfieldButton extends StatelessWidget {
   final GlobalKey<FormState> formKey1;
@@ -26,8 +27,17 @@ class SearchfieldButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 150,
+      width: double.infinity,
+      height: 60,
       child: ElevatedButton(
+        style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all(Pallete.colorDim0),
+            backgroundColor: MaterialStateProperty.all(Pallete.colorDim4),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+              side: const BorderSide(color: Pallete.colorDim0, width: 2),
+            ))),
         onPressed: () {
           //validators
           bool isValid = false;
@@ -109,7 +119,7 @@ class SearchfieldButton extends StatelessWidget {
         child: Text(
           textLabel,
           style: const TextStyle(
-            fontSize: 20,
+            fontSize: 25,
           ),
         ),
       ),

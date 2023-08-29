@@ -40,8 +40,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
       extendBody: true,
       body: screen[index],
       bottomNavigationBar: Theme(
-        data: Theme.of(context)
-            .copyWith(iconTheme: const  IconThemeData(color: Pallete.colorDim0),),
+        data: Theme.of(context).copyWith(
+          iconTheme: const IconThemeData(color: Pallete.colorDim0),
+        ),
         child: CurvedNavigationBar(
           color: Pallete.colorDim4,
           backgroundColor: Colors.transparent,
@@ -49,7 +50,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           height: 60.0,
           items: items,
           index: index,
-          animationDuration: const  Duration(milliseconds: 200),
+          animationDuration: const Duration(milliseconds: 200),
           onTap: (index) => setState(
             () => this.index = index,
           ),

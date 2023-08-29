@@ -82,18 +82,15 @@ class _SearchBoxState extends State<SearchBox> {
               const SizedBox(height: 10),
 
               //searchfield button
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: SearchfieldButton(
-                  formKey1: _formKey1,
-                  formKey2: _formKey2,
-                  locationController: _startLocation,
-                  destinationController: _endLocation,
-                  dateController: _dateinput,
-                  seatsController: _availableSeats,
-                  textLabel: 'Caută',
-                  functionName: 'takeFromDatabase',
-                ),
+              SearchfieldButton(
+                formKey1: _formKey1,
+                formKey2: _formKey2,
+                locationController: _startLocation,
+                destinationController: _endLocation,
+                dateController: _dateinput,
+                seatsController: _availableSeats,
+                textLabel: 'Caută',
+                functionName: 'takeFromDatabase',
               )
               //end searchfield button
             ],
