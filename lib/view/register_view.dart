@@ -43,9 +43,9 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       backgroundColor: Pallete.colorDim0,
       body: Padding(
-        padding: const EdgeInsets.all(50),
+        padding: const EdgeInsets.fromLTRB(50, 50, 50, 150),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const CircleAvatar(
               radius: 60,
@@ -114,7 +114,7 @@ class _RegisterState extends State<Register> {
                       size: 25,
                     ),
                   ),
-                  hintText: 'example@gmail.com',
+                  hintText: 'exemplu@gmail.com',
                   hintStyle: TextStyle(color: Pallete.colorGray),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -166,7 +166,7 @@ class _RegisterState extends State<Register> {
             Padding(
               padding: const EdgeInsets.only(top: 15),
               child: TextField(
-                style: const TextStyle(color: Pallete.colorDim4),
+                style: const TextStyle(color: Pallete.colorDim4, fontSize: 20),
                 controller: _confirmPassword,
                 obscureText: true,
                 autocorrect: false,
@@ -199,7 +199,7 @@ class _RegisterState extends State<Register> {
               padding: const EdgeInsets.only(top: 15),
               child: SizedBox(
                 width: double.infinity,
-                height: 50,
+                height: 55,
                 child: TextButton(
                   onPressed: () async {
                     final email = _email.text;
@@ -225,7 +225,8 @@ class _RegisterState extends State<Register> {
                     }
                   },
                   style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                    foregroundColor:
+                        MaterialStateProperty.all(Pallete.colorDim0),
                     backgroundColor:
                         MaterialStateProperty.all(Pallete.colorDim4),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -261,7 +262,7 @@ class _RegisterState extends State<Register> {
                       );
                     },
                     child: const Text(
-                      'Autentifică-te',
+                      'Conectează-te',
                       style: TextStyle(fontSize: 15, color: Pallete.colorDim2),
                     ),
                   )
