@@ -15,15 +15,17 @@ class GetUserName extends StatelessWidget {
       future: data.doc(uid).get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> userData =
-              snapshot.data!.data() as Map<String, dynamic>;
-          return Text(
-            userData['name'] ?? '',
-            style: const TextStyle(
-              fontSize: 35,
-              color: Colors.white,
-            ),
-          );
+          if (snapshot.hasData) {
+            Map<String, dynamic> userData =
+                snapshot.data!.data() as Map<String, dynamic>;
+            return Text(
+              userData['name'] ?? '',
+              style: const TextStyle(
+                fontSize: 35,
+                color: Colors.white,
+              ),
+            );
+          }
         }
         return const Text('loading..');
       },
