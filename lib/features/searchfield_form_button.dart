@@ -39,6 +39,8 @@ class SearchfieldButton extends StatelessWidget {
               //side: const BorderSide(color: Pallete.colorDim0, width: 2),
             ))),
         onPressed: () {
+          FocusManager.instance.primaryFocus?.unfocus(); //close keyboard
+
           //validators
           bool isValid = false;
           if (formKey1.currentState!.validate() &&
@@ -56,6 +58,7 @@ class SearchfieldButton extends StatelessWidget {
           } else {
             seats = null;
           }
+          print("$startLocation $endLocation $date $seats");
 
           //what to do based on parameter 'functionName:'
           SnackBar message;

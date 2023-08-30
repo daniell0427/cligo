@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class NrPersoane extends StatefulWidget {
-  const NrPersoane({super.key});
+  TextEditingController seatsController;
+  NrPersoane({super.key, required this.seatsController});
 
   @override
   State<NrPersoane> createState() => _NrPersoaneState();
@@ -25,6 +26,7 @@ class _NrPersoaneState extends State<NrPersoane> {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: TextFormField(
+        controller: widget.seatsController,
         style: const TextStyle(fontSize: 25, color: Pallete.textColor),
         keyboardType: TextInputType.number,
         inputFormatters: <TextInputFormatter>[

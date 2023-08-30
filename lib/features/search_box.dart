@@ -1,13 +1,19 @@
 import 'package:cligo/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-import '../features/searchfield_form_button.dart';
+import 'searchfield_form_button.dart';
 import '../forms/nr_persoane.dart';
 import '../forms/search_data.dart';
 import '../forms/searchfield_form.dart';
 
 class SearchBox extends StatefulWidget {
-  const SearchBox({super.key});
+  final String functionName;
+  final String textLabel;
+  const SearchBox({
+    super.key,
+    required this.functionName,
+    required this.textLabel,
+  });
 
   @override
   State<SearchBox> createState() => _SearchBoxState();
@@ -81,16 +87,25 @@ class _SearchBoxState extends State<SearchBox> {
               const SizedBox(
                 height: 10,
               ),
-              const Row(
+              Row(
                 children: [
-                  //search data form
-                  Expanded(flex: 1, child: SearchData()),
-                  SizedBox(
+                  //search date form
+                  Expanded(
+                      flex: 1,
+                      child: SearchData(
+                        date: _dateinput,
+                      )),
+                  const SizedBox(
                     width: 10,
                   ),
 
                   //numar persoane form
-                  Expanded(flex: 1, child: NrPersoane()),
+                  Expanded(
+                    flex: 1,
+                    child: NrPersoane(
+                      seatsController: _availableSeats,
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 10),
@@ -103,8 +118,8 @@ class _SearchBoxState extends State<SearchBox> {
                 destinationController: _endLocation,
                 dateController: _dateinput,
                 seatsController: _availableSeats,
-                textLabel: 'Caută',
-                functionName: 'takeFromDatabase',
+                textLabel: widget.textLabel,
+                functionName: widget.functionName,
               )
               //end searchfield button
             ],

@@ -1,4 +1,5 @@
 import 'package:cligo/view/add_view.dart';
+import 'package:cligo/view/chat_list_view.dart';
 import 'package:cligo/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -16,7 +17,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final screen = const [
     HomeView(),
     AddView(),
-    Text('Chat'),
+    ChatListView(),
   ];
 
   @override

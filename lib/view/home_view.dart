@@ -1,8 +1,8 @@
 import 'package:cligo/constants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:cligo/newWidgets/calatorie_item.dart';
+import 'package:cligo/features/calatorie_item.dart';
 
-import '../newWidgets/search_box.dart';
+import '../features/search_box.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -21,21 +21,24 @@ class _HomeViewState extends State<HomeView> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SearchBox(),
+              //searchbox
+              SearchBox(textLabel: 'Caută', functionName: 'takeFromDatabase'),
+
+              //calatorie Items
               Padding(
                 padding: EdgeInsets.all(15.0),
                 child: FittedBox(
                   child: Column(
                     children: [
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
                     ],
                   ),
                 ),
