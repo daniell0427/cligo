@@ -1,3 +1,4 @@
+import 'package:cligo/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cligo/newWidgets/calatorie_item.dart';
 
@@ -11,11 +12,10 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Color.fromARGB(255, 10, 185, 201),
+      backgroundColor: Pallete.colorDim0,
       body: Padding(
         padding: EdgeInsets.all(5.0),
         child: SingleChildScrollView(

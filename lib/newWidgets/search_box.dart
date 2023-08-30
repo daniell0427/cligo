@@ -1,3 +1,4 @@
+import 'package:cligo/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../features/searchfield_form_button.dart';
@@ -47,23 +48,36 @@ class _SearchBoxState extends State<SearchBox> {
         child: Container(
           width: 400,
           decoration: BoxDecoration(
-              color: const Color.fromARGB(127, 14, 54, 79),
+              color: const Color.fromARGB(66, 136, 227, 227),
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: Colors.white60,
+                color: Pallete.colorDim3,
                 width: 2,
               )),
           padding: const EdgeInsets.all(10),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Text(
+                  'Cauta ruta:',
+                  style: TextStyle(fontSize: 25, color: Pallete.colorDim3),
+                ),
+              ),
+
+              const SizedBox(
+                height: 5,
+              ),
               //start location form
-              searchfieldForm(_startLocation, _formKey1, 'Locația'),
+              searchfieldForm(_startLocation, _formKey1, 'locația'),
               const SizedBox(
                 height: 10,
               ),
 
               //end location form
-              searchfieldForm(_endLocation, _formKey2, 'Destinația'),
+              searchfieldForm(_endLocation, _formKey2, 'destinația'),
               const SizedBox(
                 height: 10,
               ),

@@ -36,7 +36,7 @@ class SearchfieldButton extends StatelessWidget {
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
-              side: const BorderSide(color: Pallete.colorDim0, width: 2),
+              //side: const BorderSide(color: Pallete.colorDim0, width: 2),
             ))),
         onPressed: () {
           //validators

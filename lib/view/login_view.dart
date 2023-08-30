@@ -35,7 +35,7 @@ class _LoginState extends State<Login> {
     return Scaffold(
       backgroundColor: Pallete.colorDim0,
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(50, 50, 50, 150),
+        padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -1,3 +1,4 @@
+import 'package:cligo/constants/images.dart';
 import 'package:flutter/material.dart';
 import 'package:cligo/constants/colors.dart';
 
@@ -15,13 +16,23 @@ class _calatorieItemState extends State<calatorieItem> {
       child: Container(
         margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
         decoration: BoxDecoration(
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black,
+              blurRadius: 25,
+              offset: Offset(0, 10),
+            )
+          ],
+          color: Color(0xFF88E3E3),
           borderRadius: BorderRadius.circular(15.0),
-          border: Border.all(width: 2, color: Colors.white54),
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Colors.white54, Colors.white10],
-          ),
+          // border: Border.all(
+          //     width: 2, color: const Color.fromARGB(142, 14, 54, 79)),
+
+          // gradient: const LinearGradient(
+          //   begin: Alignment.topLeft,
+          //   end: Alignment.bottomRight,
+          //   colors: [Colors.white54, Colors.white10],
+          // ),
         ),
         padding: const EdgeInsets.all(10.0),
         child: Row(
@@ -33,18 +44,17 @@ class _calatorieItemState extends State<calatorieItem> {
                   // Adding ClipRRect for circular shape
                   borderRadius: BorderRadius.circular(25),
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.white30, // Border color
-                        width: 2.0, // Border width
-                      ),
+                      // border: Border.all(
+                      //   color: Pallete.colorDim4, // Border color
+                      //   width: 2.0, // Border width
+                      // ),
                     ),
                     child: const CircleAvatar(
                       radius: 25,
                       backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                      backgroundImage:
-                          AssetImage('lib/assets/images/default_avatar.png'),
+                      backgroundImage: AssetImage(defaultAvatar),
                     ),
                   ),
                 ),
