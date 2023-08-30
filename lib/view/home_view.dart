@@ -20,7 +20,10 @@ class _HomeViewState extends State<HomeView> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SearchBox(),
+              //searchbox
+              SearchBox(textLabel: 'Caută', functionName: 'takeFromDatabase'),
+
+              //calatorie Items
               Padding(
                 padding: EdgeInsets.all(15.0),
                 child: FittedBox(

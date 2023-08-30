@@ -2,18 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:searchfield/searchfield.dart';
 import '../constants/list_of_countries_and_cities.dart' as mylist;
 import '../features/my_functions.dart';
+import 'package:cligo/constants/colors.dart';
 
 searchfieldForm(controllerValue, formkey, myLabelText) {
   return Form(
     key: formkey,
-    child: SizedBox(
-      width: 180,
+    child: Container(
       height: 50,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Colors.white54, Colors.white10],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       child: SearchField(
         controller: controllerValue,
-        searchStyle: const TextStyle(color: Colors.white),
+        searchStyle: const TextStyle(color: Pallete.textColor, fontSize: 25),
         suggestions: makeSearchFieldList(mylist.cities),
-        suggestionStyle: const TextStyle(),
+        suggestionStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 30,
+        ),
+        itemHeight: 50,
         //validates the suggestion
         validator: (x) {
           if (!mylist.cities.values.elementAt(0).contains(x) &&
@@ -28,22 +40,23 @@ searchfieldForm(controllerValue, formkey, myLabelText) {
           prefixIcon: const Icon(Icons.location_pin),
           prefixIconColor: Colors.white,
           filled: true,
-          fillColor: const Color.fromARGB(122, 57, 57, 57),
-          hintText: 'Caută..',
+          fillColor: Colors.transparent,
+          hintText: 'Caută...',
           hintStyle: const TextStyle(
-            color: Colors.white,
-            fontSize: 14,
+            color: Colors.white38,
+            fontSize: 20,
             height: BorderSide.strokeAlignOutside,
           ),
           labelText: myLabelText,
           labelStyle: const TextStyle(
-              fontWeight: FontWeight.normal, fontSize: 15, color: Colors.white),
+              fontWeight: FontWeight.normal, fontSize: 25, color: Colors.white),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.white,
+              width: 2,
             ),
             borderRadius: BorderRadius.all(
-              Radius.circular(0.0),
+              Radius.circular(10.0),
             ),
           ),
           focusedBorder: const OutlineInputBorder(
@@ -51,7 +64,7 @@ searchfieldForm(controllerValue, formkey, myLabelText) {
               color: Colors.white,
             ),
             borderRadius: BorderRadius.all(
-              Radius.circular(0.0),
+              Radius.circular(10.0),
             ),
           ),
         ),

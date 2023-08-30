@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class SearchData extends StatefulWidget {
-  const SearchData({super.key});
+  final TextEditingController date;
+  const SearchData({super.key, required this.date});
 
   @override
   State<SearchData> createState() => _SearchDataState();
@@ -11,7 +12,6 @@ class SearchData extends StatefulWidget {
 
 class _SearchDataState extends State<SearchData> {
   DateTime dateTime = DateTime(2022, 12, 25);
-  final TextEditingController _date = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +26,7 @@ class _SearchDataState extends State<SearchData> {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: TextFormField(
-        controller: _date,
+        controller: widget.date,
         readOnly: true,
         style: const TextStyle(
           fontSize: 25,
@@ -61,7 +61,7 @@ class _SearchDataState extends State<SearchData> {
           );
           if (pickeddate != null) {
             setState(() {
-              _date.text = DateFormat('dd-MM-yy').format(pickeddate);
+              widget.date.text = DateFormat('dd-MM-yy').format(pickeddate);
             });
           }
         },
