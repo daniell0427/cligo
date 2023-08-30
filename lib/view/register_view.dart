@@ -210,7 +210,6 @@ class _RegisterState extends State<Register> {
                         email: email,
                         password: password,
                       );
-                      devtools.log(userCredentials.toString());
                       final user = FirebaseAuth.instance.currentUser;
                       user?.sendEmailVerification();
                       Navigator.of(context).pushNamedAndRemoveUntil(
