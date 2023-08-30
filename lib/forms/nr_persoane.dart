@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class NrPersoane extends StatefulWidget {
-  TextEditingController seatsController;
-  NrPersoane({super.key, required this.seatsController});
+  final TextEditingController seatsController;
+  const NrPersoane({super.key, required this.seatsController});
 
   @override
   State<NrPersoane> createState() => _NrPersoaneState();
