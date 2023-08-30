@@ -1,4 +1,5 @@
 import 'package:cligo/view/add_view.dart';
+import 'package:cligo/view/chat_list_view.dart';
 import 'package:cligo/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -16,7 +17,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final screen = const [
     HomeView(),
     AddView(),
-    Text('Chat'),
+    ChatListView(),
   ];
 
   @override
@@ -40,8 +41,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
       extendBody: true,
       body: screen[index],
       bottomNavigationBar: Theme(
-        data: Theme.of(context)
-            .copyWith(iconTheme: const  IconThemeData(color: Pallete.colorDim0),),
+        data: Theme.of(context).copyWith(
+          iconTheme: const IconThemeData(color: Pallete.colorDim0),
+        ),
         child: CurvedNavigationBar(
           color: Pallete.colorDim4,
           backgroundColor: Colors.transparent,
@@ -49,7 +51,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           height: 60.0,
           items: items,
           index: index,
-          animationDuration: const  Duration(milliseconds: 200),
+          animationDuration: const Duration(milliseconds: 200),
           onTap: (index) => setState(
             () => this.index = index,
           ),

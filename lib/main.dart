@@ -1,4 +1,6 @@
 import 'package:cligo/constants/routes.dart';
+import 'package:cligo/view/chat_list_view.dart';
+import 'package:cligo/view/chat_view.dart';
 import 'package:cligo/view/greetings_view.dart';
 import 'package:cligo/view/home_template.dart';
 import 'package:cligo/view/login_view.dart';
@@ -29,6 +31,7 @@ void main() async {
         homeRoute: (context) => const HomeView(),
         profileRoute: (context) => const ProfileView(),
         verifyEmailRoute: (context) => const VerifyEmailView(),
+        chatListRoute:(context) => const ChatListView(),
       },
     ),
   );

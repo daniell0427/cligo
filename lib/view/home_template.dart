@@ -1,8 +1,6 @@
 import 'package:cligo/constants/images.dart';
 import 'package:cligo/constants/routes.dart';
-import 'package:cligo/features/bottom_navigation.dart' as features;
-import 'package:cligo/features/logout.dart' as features;
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cligo/features/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 
 // ignore: unused_import
@@ -15,45 +13,25 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-enum NavAction { logout }
-
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.indigoAccent,
+        backgroundColor: const Color.fromARGB(255, 10, 185, 201),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, profileRoute);
-              },
-              icon: Image.asset(defaultAvatar)),
-          PopupMenuButton<NavAction>(
-            icon: const Icon(Icons.settings),
-            onSelected: (value) async {
-              switch (value) {
-                case NavAction.logout:
-                  final shouldLogout = await features.showLogoutDialog(context);
-                  if (shouldLogout) {
-                    FirebaseAuth.instance.signOut();
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil(loginRoute, (_) => false);
-                  }
-              }
+            onPressed: () {
+              Navigator.pushNamed(context, profileRoute);
             },
-            itemBuilder: (context) {
-              return const [
-                PopupMenuItem<NavAction>(
-                    value: NavAction.logout, child: Text('Log out'))
-              ];
-            },
-          )
+            icon: Image.asset(defaultAvatar),
+          ),
         ],
       ),
       body: GestureDetector(
-        child: const features.BottomNavigation(),
+        //bottom navigation bar
+        child: const BottomNavigation(),
         onTap: () {
           FocusScope.of(context).unfocus();
         },

@@ -27,13 +27,15 @@ class _SearchDataState extends State<SearchData> {
       ),
       child: TextFormField(
         controller: _date,
-        style: const TextStyle(fontSize: 25, color: Pallete.textColor),
+        readOnly: true,
+        style: const TextStyle(
+          fontSize: 25,
+          color: Pallete.textColor,
+        ),
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.calendar_today_rounded),
           prefixIconColor: Colors.white,
-          hintText: 'aa-ll-zz',
-          hintStyle: const TextStyle(color: Colors.white38),
-          labelText: 'data',
+          labelText: 'Data',
           labelStyle: const TextStyle(color: Colors.white),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -54,8 +56,8 @@ class _SearchDataState extends State<SearchData> {
           DateTime? pickeddate = await showDatePicker(
             context: context,
             initialDate: DateTime.now(),
-            firstDate: DateTime(2022),
-            lastDate: DateTime(2026),
+            firstDate: DateTime.now(),
+            lastDate: DateTime(2100),
           );
           if (pickeddate != null) {
             setState(() {

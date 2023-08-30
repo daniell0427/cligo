@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cligo/newWidgets/calatorie_item.dart';
+import 'package:cligo/features/calatorie_item.dart';
 
-import '../newWidgets/search_box.dart';
+import '../features/search_box.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -11,7 +11,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
@@ -27,15 +26,15 @@ class _HomeViewState extends State<HomeView> {
                 child: FittedBox(
                   child: Column(
                     children: [
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
-                      calatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
+                      CalatorieItem(),
                     ],
                   ),
                 ),

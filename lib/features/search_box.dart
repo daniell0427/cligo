@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../features/searchfield_form_button.dart';
+import 'searchfield_form_button.dart';
 import '../forms/nr_persoane.dart';
 import '../forms/search_data.dart';
 import '../forms/searchfield_form.dart';
@@ -69,7 +69,7 @@ class _SearchBoxState extends State<SearchBox> {
               ),
               const Row(
                 children: [
-                  //search data form
+                  //search date form
                   Expanded(flex: 1, child: SearchData()),
                   SizedBox(
                     width: 10,

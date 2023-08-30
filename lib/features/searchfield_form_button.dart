@@ -29,6 +29,8 @@ class SearchfieldButton extends StatelessWidget {
       width: 150,
       child: ElevatedButton(
         onPressed: () {
+          FocusManager.instance.primaryFocus?.unfocus(); //close keyboard
+
           //validators
           bool isValid = false;
           if (formKey1.currentState!.validate() &&
