@@ -88,7 +88,7 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
                       ),
                       child: SizedBox(
-                        width: 85,
+                        width: 105,
                         child: IconButton(
                           icon: Ink.image(
                             image: const AssetImage(defaultAvatar), //pfp

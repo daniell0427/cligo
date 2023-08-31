@@ -1,3 +1,4 @@
+import 'package:cligo/constants/colors.dart';
 import 'package:cligo/constants/images.dart';
 import 'package:cligo/constants/routes.dart';
 import 'package:cligo/features/bottom_navigation.dart';
@@ -19,7 +20,14 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 10, 185, 201),
+        toolbarHeight: 70,
+        backgroundColor: Pallete.colorDim4,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20))),
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -27,6 +35,10 @@ class _HomeViewState extends State<HomeView> {
             },
             icon: Image.asset(defaultAvatar),
           ),
+          const CircleAvatar(
+            backgroundImage: AssetImage(placeHolderLogo),
+            backgroundColor: Colors.transparent,
+          )
         ],
       ),
       body: GestureDetector(

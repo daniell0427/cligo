@@ -17,7 +17,7 @@ class _HomeViewState extends State<HomeView> {
     return const Scaffold(
       backgroundColor: Pallete.colorDim0,
       body: Padding(
-        padding: EdgeInsets.all(5.0),
+        padding: EdgeInsets.all(0),
         child: SingleChildScrollView(
           child: Column(
             children: [

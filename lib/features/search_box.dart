@@ -52,14 +52,23 @@ class _SearchBoxState extends State<SearchBox> {
     return Center(
       child: FittedBox(
         child: Container(
+          margin: const EdgeInsets.all(10),
           width: 400,
           decoration: BoxDecoration(
-              color: const Color.fromARGB(66, 136, 227, 227),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
+            boxShadow: const [
+              BoxShadow(
                 color: Pallete.colorDim3,
-                width: 2,
-              )),
+                blurRadius: 5,
+                offset: Offset(0, 0),
+              )
+            ],
+            color: const Color.fromARGB(255, 208, 255, 255),
+            borderRadius: BorderRadius.circular(10),
+            // border: Border.all(
+            //   color: Pallete.colorDim3,
+            //   width: 2,
+            // )
+          ),
           padding: const EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

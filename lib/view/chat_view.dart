@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:cligo/constants/colors.dart';
 
 class ChatView extends StatefulWidget {
   final String receiverUserName;
@@ -62,11 +63,16 @@ class _ChatViewState extends State<ChatView> {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: Text(widget.receiverUserName),
+            title: Text(
+              widget.receiverUserName,
+              style: const TextStyle(color: Pallete.colorDim0),
+            ),
+            backgroundColor: Pallete.colorDim4,
           ),
           body: Column(
             children: [
               //show previous messages
+
               Expanded(child: buildMessageList(screenWidth, screenHeight)),
 
               //access send_message textfield WIDGET
@@ -76,52 +82,51 @@ class _ChatViewState extends State<ChatView> {
     );
   }
 
-  //SEND_MESSAGE TEXTFIELD WIDGET
+  //!SEND_MESSAGE TEXTFIELD WIDGET
   Widget messageTextfield(screenWidth, screenHeight) {
-    return Expanded(
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: SizedBox(
-          width: screenWidth,
-          height: screenHeight * 0.06,
-          child: TextField(
-            style: const TextStyle(
-              color: Colors.white,
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: SizedBox(
+        width: screenWidth,
+        height: screenHeight * 0.07,
+        child: TextField(
+          textAlignVertical: TextAlignVertical.center,
+          style: const TextStyle(
+            color: Pallete.colorDim0,
+            fontSize: 20,
+          ),
+          controller: _message,
+          decoration: InputDecoration(
+            suffixIconColor: Pallete.colorDim0,
+            hintText: "Mesaj...",
+            hintStyle: const TextStyle(
+              color: Pallete.colorGray,
               fontSize: 20,
             ),
-            controller: _message,
-            decoration: InputDecoration(
-              suffixIconColor: Colors.white,
-              hintText: "Mesaj..",
-              hintStyle: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-              ),
-              filled: true,
-              fillColor: const Color.fromARGB(122, 57, 57, 57),
+            filled: true,
+            fillColor: Pallete.colorDim4,
 
-              //send message button
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.send),
-                onPressed: () {
-                  sendMessage(); //send message
-                },
-              ),
+            //send message button
+            suffixIcon: IconButton(
+              icon: const Icon(Icons.send),
+              onPressed: () {
+                sendMessage(); //send message
+              },
+            ),
 
-              //textfield border
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(0.0)),
+            //textfield border
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Pallete.colorDim4,
               ),
-              focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white,
-                ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(0.0),
-                ),
+              borderRadius: BorderRadius.all(Radius.circular(0.0)),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Pallete.colorDim4,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(0.0),
               ),
             ),
           ),
@@ -163,7 +168,7 @@ class _ChatViewState extends State<ChatView> {
               height: screenHeight * 0.15,
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Color.fromARGB(43, 158, 158, 158),
+                  color: Color.fromARGB(43, 255, 0, 0),
                   borderRadius: BorderRadius.all(
                     Radius.circular(10.0),
                   ),
@@ -200,7 +205,7 @@ class _ChatViewState extends State<ChatView> {
     );
   }
 
-  //MESSAGES ITEM
+  //!MESSAGES ITEM
   String? previousMessage;
 
   Widget buildMessageItem(DocumentSnapshot document) {
@@ -245,12 +250,12 @@ class _ChatViewState extends State<ChatView> {
     dynamic boxColor;
     if (data['senderID'] == _fireauth.currentUser!.uid) {
       alignment = Alignment.centerRight;
-      paddingSide = const EdgeInsets.only(left: 20.0, right: 5.0);
-      boxColor = const Color.fromARGB(156, 1, 119, 237);
+      paddingSide = const EdgeInsets.only(right: 10.0);
+      boxColor = Pallete.colorDim2;
     } else {
       alignment = Alignment.centerLeft;
-      paddingSide = const EdgeInsets.only(right: 20.0, left: 5.0);
-      boxColor = const Color.fromARGB(141, 87, 87, 87);
+      paddingSide = const EdgeInsets.only(left: 10.0);
+      boxColor = Pallete.colorGray;
     }
 
     //message design
@@ -260,56 +265,60 @@ class _ChatViewState extends State<ChatView> {
         Container(
           alignment: alignment,
           child: Padding(
-            padding: const EdgeInsets.only(top: 5.0),
-            child: Column(children: [
-              //message container decorations
-              Padding(
-                padding: paddingSide,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: boxColor,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10.0),
-                    ),
-                    border: const Border.fromBorderSide(
-                      BorderSide(
-                        color: Colors.black,
+            padding: const EdgeInsets.only(bottom: 5.0),
+            child: Padding(
+              padding: paddingSide,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                    maxWidth: 320), //TODO: change relative to screen width
+                child: IntrinsicWidth(
+                  child: Container(
+                    //width: ,
+                    decoration: BoxDecoration(
+                      color: boxColor,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(20.0),
                       ),
+                      // border: const Border.fromBorderSide(
+                      //   BorderSide(
+                      //     color: Colors.black,
+                      //   ),
+                      // ),
                     ),
-                  ),
 
-                  //message and styles
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Row(
-                      children: [
-                        //message
+                    //message and styles
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 8, 0, 8),
+                      child: Row(
+                        children: [
+                          //message
 
-                        Flexible(
-                          child: Text(
-                            data['message'],
-                            style: const TextStyle(
-                              fontSize: 18,
+                          Flexible(
+                            child: Text(
+                              data['message'],
+                              style: const TextStyle(
+                                  fontSize: 25, color: Pallete.textColor),
+                              maxLines: 1000,
+                              softWrap: true,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            maxLines: 1000,
-                            softWrap: false,
-                            overflow: TextOverflow.ellipsis,
                           ),
-                        ),
 
-                        //timestamp
-                        FittedBox(
-                          child: Text(
-                            hourMinuteSent,
-                            style: const TextStyle(fontSize: 12),
+                          //timestamp
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Text(
+                              hourMinuteSent,
+                              style: const TextStyle(fontSize: 12),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ]),
+            ),
           ),
         ),
       ],

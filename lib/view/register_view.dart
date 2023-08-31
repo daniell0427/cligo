@@ -45,258 +45,268 @@ class _RegisterState extends State<Register> {
       },
       child: Scaffold(
         backgroundColor: Pallete.colorDim0,
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(50, 50, 50, 150),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const CircleAvatar(
-                radius: 60,
-                backgroundColor: Colors.transparent,
-                backgroundImage: AssetImage(placeHolderLogo),
-              ),
-
-              //!Title
-              const Padding(
-                padding: EdgeInsets.only(
-                  bottom: 15.0,
-                ),
-                child: Text(
-                  'Înregistrare',
-                  style: TextStyle(
-                    fontSize: 40,
-                    color: Pallete.colorDim4,
+        body: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const CircleAvatar(
+                    radius: 60,
+                    backgroundColor: Colors.transparent,
+                    backgroundImage: AssetImage(placeHolderLogo),
                   ),
-                ),
-              ),
 
-              //!Name textfield
-              TextField(
-                style: const TextStyle(color: Pallete.colorDim4, fontSize: 20),
-                controller: _name,
-                autocorrect: false,
-                enableSuggestions: true,
-                decoration: const InputDecoration(
-                  prefixIcon: Padding(
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: Icon(
-                      Icons.person,
-                      color: Pallete.colorDim4,
-                      size: 30,
+                  //!Title
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      bottom: 15.0,
                     ),
-                  ),
-                  hintText: 'ex: Artene Alex',
-                  hintStyle: TextStyle(color: Pallete.colorGray),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: Pallete.colorDim4, width: 2),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide:
-                          BorderSide(color: Pallete.colorDim4, width: 2)),
-                  labelText: 'Nume',
-                  labelStyle: TextStyle(fontSize: 20, color: Pallete.colorDim4),
-                ),
-              ),
-
-              //!Email Textfield
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: TextField(
-                  style:
-                      const TextStyle(color: Pallete.colorDim4, fontSize: 20),
-                  controller: _email,
-                  autocorrect: false,
-                  enableSuggestions: true,
-                  decoration: const InputDecoration(
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: Icon(
-                        Icons.email,
+                    child: Text(
+                      'Înregistrare',
+                      style: TextStyle(
+                        fontSize: 40,
                         color: Pallete.colorDim4,
-                        size: 25,
                       ),
                     ),
-                    hintText: 'exemplu@gmail.com',
-                    hintStyle: TextStyle(color: Pallete.colorGray),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide:
-                          BorderSide(color: Pallete.colorDim4, width: 2),
-                    ),
-                    focusedBorder: OutlineInputBorder(
+                  ),
+
+                  //!Name textfield
+                  TextField(
+                    style:
+                        const TextStyle(color: Pallete.colorDim4, fontSize: 20),
+                    controller: _name,
+                    autocorrect: false,
+                    enableSuggestions: true,
+                    decoration: const InputDecoration(
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child: Icon(
+                          Icons.person,
+                          color: Pallete.colorDim4,
+                          size: 30,
+                        ),
+                      ),
+                      hintText: 'ex: Artene Alex',
+                      hintStyle: TextStyle(color: Pallete.colorGray),
+                      enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide:
-                            BorderSide(color: Pallete.colorDim4, width: 2)),
-                    labelText: 'Email',
-                    labelStyle:
-                        TextStyle(fontSize: 20, color: Pallete.colorDim4),
+                            BorderSide(color: Pallete.colorDim4, width: 2),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide:
+                              BorderSide(color: Pallete.colorDim4, width: 2)),
+                      labelText: 'Nume',
+                      labelStyle:
+                          TextStyle(fontSize: 20, color: Pallete.colorDim4),
+                    ),
                   ),
-                ),
-              ),
 
-              //!password textfield
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: TextField(
-                  style:
-                      const TextStyle(color: Pallete.colorDim4, fontSize: 20),
-                  controller: _password,
-                  obscureText: true,
-                  autocorrect: false,
-                  enableSuggestions: false,
-                  decoration: const InputDecoration(
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: Icon(
-                        Icons.lock,
-                        color: Pallete.colorDim4,
-                        size: 30,
+                  //!Email Textfield
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: TextField(
+                      style: const TextStyle(
+                          color: Pallete.colorDim4, fontSize: 20),
+                      controller: _email,
+                      autocorrect: false,
+                      enableSuggestions: true,
+                      decoration: const InputDecoration(
+                        prefixIcon: Padding(
+                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: Icon(
+                            Icons.email,
+                            color: Pallete.colorDim4,
+                            size: 25,
+                          ),
+                        ),
+                        hintText: 'exemplu@gmail.com',
+                        hintStyle: TextStyle(color: Pallete.colorGray),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide:
+                              BorderSide(color: Pallete.colorDim4, width: 2),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide:
+                                BorderSide(color: Pallete.colorDim4, width: 2)),
+                        labelText: 'Email',
+                        labelStyle:
+                            TextStyle(fontSize: 20, color: Pallete.colorDim4),
                       ),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide:
-                          BorderSide(color: Pallete.colorDim4, width: 2),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide:
-                            BorderSide(color: Pallete.colorDim4, width: 2)),
-                    labelText: 'Parola',
-                    labelStyle:
-                        TextStyle(fontSize: 20, color: Pallete.colorDim4),
                   ),
-                ),
-              ),
 
-              //!confirm password textfield
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: TextField(
-                  style:
-                      const TextStyle(color: Pallete.colorDim4, fontSize: 20),
-                  controller: _confirmPassword,
-                  obscureText: true,
-                  autocorrect: false,
-                  enableSuggestions: false,
-                  decoration: const InputDecoration(
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: Icon(
-                        Icons.lock,
-                        color: Pallete.colorDim4,
-                        size: 30,
+                  //!password textfield
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: TextField(
+                      style: const TextStyle(
+                          color: Pallete.colorDim4, fontSize: 20),
+                      controller: _password,
+                      obscureText: true,
+                      autocorrect: false,
+                      enableSuggestions: false,
+                      decoration: const InputDecoration(
+                        prefixIcon: Padding(
+                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: Icon(
+                            Icons.lock,
+                            color: Pallete.colorDim4,
+                            size: 30,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide:
+                              BorderSide(color: Pallete.colorDim4, width: 2),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide:
+                                BorderSide(color: Pallete.colorDim4, width: 2)),
+                        labelText: 'Parola',
+                        labelStyle:
+                            TextStyle(fontSize: 20, color: Pallete.colorDim4),
                       ),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide:
-                          BorderSide(color: Pallete.colorDim4, width: 2),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide:
-                            BorderSide(color: Pallete.colorDim4, width: 2)),
-                    labelText: 'Confirmă Parola',
-                    labelStyle:
-                        TextStyle(fontSize: 20, color: Pallete.colorDim4),
                   ),
-                ),
-              ),
 
-              //!Button
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 55,
-                  child: TextButton(
-                    onPressed: () async {
-                      final name = _name.text;
-                      final email = _email.text;
-                      final password = _password.text;
-                      final confirmPassword = _confirmPassword.text;
+                  //!confirm password textfield
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: TextField(
+                      style: const TextStyle(
+                          color: Pallete.colorDim4, fontSize: 20),
+                      controller: _confirmPassword,
+                      obscureText: true,
+                      autocorrect: false,
+                      enableSuggestions: false,
+                      decoration: const InputDecoration(
+                        prefixIcon: Padding(
+                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: Icon(
+                            Icons.lock,
+                            color: Pallete.colorDim4,
+                            size: 30,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide:
+                              BorderSide(color: Pallete.colorDim4, width: 2),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide:
+                                BorderSide(color: Pallete.colorDim4, width: 2)),
+                        labelText: 'Confirmă Parola',
+                        labelStyle:
+                            TextStyle(fontSize: 20, color: Pallete.colorDim4),
+                      ),
+                    ),
+                  ),
 
-                      //confirm pass verification => create user
-                      if (password == confirmPassword) {
-                        UserCredential userCredentials = await FirebaseAuth
-                            .instance
-                            .createUserWithEmailAndPassword(
-                          email: email,
-                          password: password,
-                        );
-                        //get uid
-                        final uid = userCredentials.user!.uid;
+                  //!Button
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 55,
+                      child: TextButton(
+                        onPressed: () async {
+                          final name = _name.text;
+                          final email = _email.text;
+                          final password = _password.text;
+                          final confirmPassword = _confirmPassword.text;
 
-                        //push user credentials to database
-                        pushUserData(uid, name, email);
+                          //confirm pass verification => create user
+                          if (password == confirmPassword) {
+                            UserCredential userCredentials = await FirebaseAuth
+                                .instance
+                                .createUserWithEmailAndPassword(
+                              email: email,
+                              password: password,
+                            );
+                            //get uid
+                            final uid = userCredentials.user!.uid;
 
-                        //send email verification and navigate to verify_email_view
-                        final currentUser = FirebaseAuth.instance.currentUser;
-                        currentUser?.sendEmailVerification();
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                          verifyEmailRoute,
-                          (route) => false,
-                        );
-                      }
+                            //push user credentials to database
+                            pushUserData(uid, name, email);
 
-                      //if incorect password
-                      else {
-                        print('Parola incorecta');
-                        _password.clear();
-                        _confirmPassword.clear();
-                      }
-                    },
-                    style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all(Pallete.colorDim0),
-                      backgroundColor:
-                          MaterialStateProperty.all(Pallete.colorDim4),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          // side:
-                          //     const BorderSide(color: Pallete.colorDim0, width: 2),
+                            //send email verification and navigate to verify_email_view
+                            final currentUser =
+                                FirebaseAuth.instance.currentUser;
+                            currentUser?.sendEmailVerification();
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                              verifyEmailRoute,
+                              (route) => false,
+                            );
+                          }
+
+                          //if incorect password
+                          else {
+                            print('Parola incorecta');
+                            _password.clear();
+                            _confirmPassword.clear();
+                          }
+                        },
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all(Pallete.colorDim0),
+                          backgroundColor:
+                              MaterialStateProperty.all(Pallete.colorDim4),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              // side:
+                              //     const BorderSide(color: Pallete.colorDim0, width: 2),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          'Înregistrează-te',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.normal),
                         ),
                       ),
                     ),
-                    child: const Text(
-                      'Înregistrează-te',
-                      style: TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.normal),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Ești deja înregistrat?',
+                          style:
+                              TextStyle(color: Pallete.colorDim4, fontSize: 15),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              loginRoute,
+                              (route) => false,
+                            );
+                          },
+                          child: const Text(
+                            'Conectează-te',
+                            style: TextStyle(
+                                fontSize: 15, color: Pallete.colorDim2),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Ești deja înregistrat?',
-                      style: TextStyle(color: Pallete.colorDim4, fontSize: 15),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          loginRoute,
-                          (route) => false,
-                        );
-                      },
-                      child: const Text(
-                        'Conectează-te',
-                        style:
-                            TextStyle(fontSize: 15, color: Pallete.colorDim2),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
