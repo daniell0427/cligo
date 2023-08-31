@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:cligo/constants/colors.dart';
 import 'package:cligo/constants/images.dart';
 
-
 class Register extends StatefulWidget {
   const Register({super.key});
 

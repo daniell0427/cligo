@@ -78,50 +78,48 @@ class _ChatViewState extends State<ChatView> {
 
   //SEND_MESSAGE TEXTFIELD WIDGET
   Widget messageTextfield(screenWidth, screenHeight) {
-    return Expanded(
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: SizedBox(
-          width: screenWidth,
-          height: screenHeight * 0.06,
-          child: TextField(
-            style: const TextStyle(
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: SizedBox(
+        width: screenWidth,
+        height: screenHeight * 0.06,
+        child: TextField(
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
+          controller: _message,
+          decoration: InputDecoration(
+            suffixIconColor: Colors.white,
+            hintText: "Mesaj..",
+            hintStyle: const TextStyle(
               color: Colors.white,
               fontSize: 20,
             ),
-            controller: _message,
-            decoration: InputDecoration(
-              suffixIconColor: Colors.white,
-              hintText: "Mesaj..",
-              hintStyle: const TextStyle(
+            filled: true,
+            fillColor: const Color.fromARGB(122, 57, 57, 57),
+
+            //send message button
+            suffixIcon: IconButton(
+              icon: const Icon(Icons.send),
+              onPressed: () {
+                sendMessage(); //send message
+              },
+            ),
+
+            //textfield border
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
                 color: Colors.white,
-                fontSize: 20,
               ),
-              filled: true,
-              fillColor: const Color.fromARGB(122, 57, 57, 57),
-
-              //send message button
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.send),
-                onPressed: () {
-                  sendMessage(); //send message
-                },
+              borderRadius: BorderRadius.all(Radius.circular(0.0)),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.white,
               ),
-
-              //textfield border
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(0.0)),
-              ),
-              focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white,
-                ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(0.0),
-                ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(0.0),
               ),
             ),
           ),
