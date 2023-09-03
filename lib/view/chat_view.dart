@@ -20,6 +20,7 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
+  // late ScrollController _scrollController;
   //Text edditing controllers
   late final TextEditingController _message;
 
@@ -27,11 +28,16 @@ class _ChatViewState extends State<ChatView> {
   void initState() {
     _message = TextEditingController();
     super.initState();
+    // _scrollController = ScrollController();
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    // });
   }
 
   @override
   void dispose() {
     _message.dispose();
+    // _scrollController.dispose();
     super.dispose();
   }
 
@@ -69,15 +75,21 @@ class _ChatViewState extends State<ChatView> {
             ),
             backgroundColor: Pallete.colorDim4,
           ),
-          body: Column(
-            children: [
-              //show previous messages
+          body: Container(
+            color: Pallete.colorDim0,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Column(
+                children: [
+                  //show previous messages
 
-              Expanded(child: buildMessageList(screenWidth, screenHeight)),
+                  Expanded(child: buildMessageList(screenWidth, screenHeight)),
 
-              //access send_message textfield WIDGET
-              messageTextfield(screenWidth, screenHeight),
-            ],
+                  //access send_message textfield WIDGET
+                  messageTextfield(screenWidth, screenHeight),
+                ],
+              ),
+            ),
           )),
     );
   }
@@ -168,7 +180,7 @@ class _ChatViewState extends State<ChatView> {
               height: screenHeight * 0.15,
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Color.fromARGB(43, 255, 0, 0),
+                  color: Pallete.colorDim1,
                   borderRadius: BorderRadius.all(
                     Radius.circular(10.0),
                   ),
@@ -310,6 +322,7 @@ class _ChatViewState extends State<ChatView> {
                             child: Text(
                               hourMinuteSent,
                               style: const TextStyle(fontSize: 12),
+                              textAlign: TextAlign.end,
                             ),
                           ),
                         ],

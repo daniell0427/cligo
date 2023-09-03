@@ -1,5 +1,6 @@
 import 'package:cligo/features/search_box.dart';
 import 'package:flutter/material.dart';
+import 'package:cligo/constants/colors.dart';
 
 class AddView extends StatefulWidget {
   const AddView({super.key});
@@ -35,19 +36,22 @@ class _AddViewState extends State<AddView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(
-        top: 20.0,
-        bottom: 5.0,
-        left: 5.0,
-        right: 5.0,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          //searchbox
-          SearchBox(textLabel: 'Adaugă', functionName: 'pushToDatabase'),
-        ],
+    return Container(
+      color: Pallete.colorDim0,
+      child: const Padding(
+        padding: EdgeInsets.only(
+          top: 80.0,
+          bottom: 5.0,
+          left: 5.0,
+          right: 5.0,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            //searchbox
+            SearchBox(textLabel: 'Adaugă', functionName: 'pushToDatabase'),
+          ],
+        ),
       ),
     );
   }

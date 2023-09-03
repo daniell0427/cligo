@@ -21,7 +21,7 @@ class GetUserName extends StatelessWidget {
             return Text(
               userData['name'] ?? '',
               style: const TextStyle(
-                fontSize: 35,
+                fontSize: 30,
                 color: Colors.white,
               ),
             );
