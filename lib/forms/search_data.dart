@@ -28,7 +28,7 @@ class _SearchDataState extends State<SearchData> {
       ),
       child: TextFormField(
         controller: widget.date,
-        readOnly: true,
+        readOnly: false,
         style: const TextStyle(
           fontSize: 25,
           color: Pallete.textColor,
