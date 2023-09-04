@@ -53,6 +53,16 @@ searchfieldForm(controllerValue, formkey, myLabelText) {
                 fontWeight: FontWeight.normal,
                 fontSize: 25,
                 color: Pallete.colorDim4),
+            //*border
+            border: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Pallete.colorDim4,
+                width: 2,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10.0),
+              ),
+            ),
             enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Pallete.colorDim4,
@@ -65,6 +75,7 @@ searchfieldForm(controllerValue, formkey, myLabelText) {
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Pallete.colorDim4,
+                width: 2,
               ),
               borderRadius: BorderRadius.all(
                 Radius.circular(10.0),
@@ -73,6 +84,7 @@ searchfieldForm(controllerValue, formkey, myLabelText) {
             disabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Pallete.colorDim4,
+                width: 2,
               ),
               borderRadius: BorderRadius.all(
                 Radius.circular(10.0),

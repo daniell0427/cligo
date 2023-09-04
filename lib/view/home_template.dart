@@ -32,15 +32,22 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, profileRoute);
-            },
-            icon: Image.asset(currentPfp),
-          ),
-          const CircleAvatar(
-            backgroundImage: AssetImage(placeHolderLogo),
-            backgroundColor: Colors.transparent,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const CircleAvatar(
+                radius: 40,
+                backgroundImage: AssetImage(placeHolderLogo),
+                backgroundColor: Colors.transparent,
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, profileRoute);
+                },
+                icon: Image.asset(currentPfp),
+                iconSize: 50,
+              )
+            ],
           )
         ],
       ),

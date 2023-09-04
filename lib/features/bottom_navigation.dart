@@ -49,8 +49,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
             boxShadow: [
               BoxShadow(
                 color: Pallete.colorDim4,
-                blurRadius: 40,
-                offset: Offset(0, 0),
+                blurRadius: 60,
+                offset: Offset(0, 20),
               )
             ],
           ),
