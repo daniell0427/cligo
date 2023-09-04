@@ -36,8 +36,6 @@ class _SearchDataState extends State<SearchData> {
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.calendar_today_rounded),
           prefixIconColor: Pallete.colorDim4,
-          hintText: 'aa-ll-zz',
-          hintStyle: const TextStyle(color: Pallete.colorDim4),
           labelText: 'data',
           labelStyle: const TextStyle(color: Pallete.colorDim4),
           enabledBorder: OutlineInputBorder(

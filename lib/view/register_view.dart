@@ -1,9 +1,12 @@
 import 'package:cligo/constants/routes.dart';
-import 'package:cligo/database/read_data/user.dart';
+import 'package:cligo/constants/variables.dart';
+import 'package:cligo/database/push_to_firebase/create_user.dart';
+import 'package:cligo/features/create_snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cligo/constants/colors.dart';
 import 'package:cligo/constants/images.dart';
+import 'dart:developer';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -224,35 +227,123 @@ class _RegisterState extends State<Register> {
                           final password = _password.text;
                           final confirmPassword = _confirmPassword.text;
 
-                          //confirm pass verification => create user
-                          if (password == confirmPassword) {
-                            UserCredential userCredentials = await FirebaseAuth
-                                .instance
-                                .createUserWithEmailAndPassword(
-                              email: email,
-                              password: password,
-                            );
-                            //get uid
-                            final uid = userCredentials.user!.uid;
+                          SnackBar? message;
 
-                            //push user credentials to database
-                            pushUserData(uid, name, email);
-
-                            //send email verification and navigate to verify_email_view
-                            final currentUser =
-                                FirebaseAuth.instance.currentUser;
-                            currentUser?.sendEmailVerification();
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                              verifyEmailRoute,
-                              (route) => false,
+                          //if forms are not completed:
+                          if (name == '' ||
+                              email == '' ||
+                              password == '' ||
+                              confirmPassword == '') {
+                            //snackbar message
+                            message = const SnackBar(
+                              content: Text(
+                                'Completați toate spațiile!',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             );
                           }
 
-                          //if incorect password
+                          //if forms are completed:
                           else {
-                            print('Parola incorecta');
-                            _password.clear();
-                            _confirmPassword.clear();
+                            //confirm pass verification => create user
+                            if (password == confirmPassword) {
+                              try {
+                                await fireauth.createUserWithEmailAndPassword(
+                                  email: email,
+                                  password: password,
+                                );
+
+                                variables();
+
+                                //set user display name
+                                currentUser?.updateDisplayName(name);
+                                currentUser?.updatePhotoURL(defaultAvatar);
+
+                                //push user credentials to database
+                                pushUserData(currentUserID, name, email);
+
+                                //send email verification and navigate to verify_email_view
+                                currentUser?.sendEmailVerification();
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                  verifyEmailRoute,
+                                  (route) => false,
+                                );
+                              } on FirebaseAuthException catch (error) {
+                                //clear password and confirm password
+                                _confirmPassword.clear();
+                                _password.clear();
+
+                                //invalid email
+                                if (error.code == 'invalid-email') {
+                                  message = const SnackBar(
+                                    content: Text(
+                                      'Email invalid!',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  );
+                                }
+
+                                //password too short
+                                else if (error.code == 'weak-password') {
+                                  message = const SnackBar(
+                                    content: Text(
+                                      'Parolă prea scurtă!',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  message = const SnackBar(
+                                    content: Text(
+                                      'Eroare: Ceva neașteptat s-a întâmplat!',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  );
+                                  log('Eroare: $error');
+                                }
+                              }
+
+                              //other errors
+                              catch (error) {
+                                //clear password and confirm password
+                                _confirmPassword.clear();
+                                _password.clear();
+
+                                message = const SnackBar(
+                                  content: Text(
+                                    'Eroare: Ceva neașteptat s-a întâmplat!',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                );
+                                log('Eroare: $error');
+                              }
+                            }
+
+                            //if incorect password
+                            else {
+                              message = const SnackBar(
+                                content: Text(
+                                  'Parolele nu sunt aceleași!',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              );
+                              _password.clear();
+                              _confirmPassword.clear();
+                            }
+                          }
+                          if (message != null) {
+                            createSnackbar(context, message);
                           }
                         },
                         style: ButtonStyle(

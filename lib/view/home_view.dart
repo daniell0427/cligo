@@ -1,7 +1,6 @@
 import 'package:cligo/constants/colors.dart';
+import 'package:cligo/database/functions/route_service.dart';
 import 'package:flutter/material.dart';
-import 'package:cligo/features/calatorie_item.dart';
-
 import '../features/search_box.dart';
 
 class HomeView extends StatefulWidget {
@@ -14,37 +13,33 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    const dynamic textAbove = Text(
+      'Cauta ruta:',
+      style: TextStyle(fontSize: 25, color: Pallete.colorDim3),
+    );
+
+    return Scaffold(
       backgroundColor: Pallete.colorDim0,
       body: Padding(
-        padding: EdgeInsets.all(0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              //searchbox
-              SearchBox(textLabel: 'Caută', functionName: 'takeFromDatabase'),
-
-              //calatorie Items
-              Padding(
-                padding: EdgeInsets.all(15.0),
-                child: FittedBox(
-                  child: Column(
-                    children: [
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
-                      CalatorieItem(),
-                    ],
+        padding: const EdgeInsets.all(0),
+        child: Column(
+          children: [
+            Expanded(
+              child: Column(
+                children: [
+                  //searchbox
+                  const SearchBox(
+                    textLabel: 'Caută',
+                    functionName: 'takeFromDatabase',
+                    textAbove: textAbove,
                   ),
-                ),
+
+                  //calatorie Items
+                  Expanded(child: RouteService().getRecentIDs()),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

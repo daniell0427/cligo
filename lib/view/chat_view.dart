@@ -1,10 +1,9 @@
+import 'package:cligo/constants/variables.dart';
 import 'package:cligo/database/services/chat_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cligo/constants/colors.dart';
-import 'package:flutter/src/widgets/scroll_controller.dart';
 
 class ChatView extends StatefulWidget {
   final String receiverUserName;
@@ -56,8 +55,6 @@ class _ChatViewState extends State<ChatView> {
     }
   }
 
-  //instances of firebase
-  final _fireauth = FirebaseAuth.instance;
 
   //CHAT VIEW
   @override
@@ -65,6 +62,10 @@ class _ChatViewState extends State<ChatView> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
+
+    //get variables
+    variables();
+    
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -153,7 +154,7 @@ class _ChatViewState extends State<ChatView> {
   Widget buildMessageList(screenWidth, screenHeight) {
     return StreamBuilder(
       stream: ChatServices()
-          .getMessages(_fireauth.currentUser!.uid, widget.receiverUserID),
+          .getMessages(currentUserID, widget.receiverUserID),
       builder: (context, snapshot) {
         //if error]
 
@@ -268,7 +269,7 @@ class _ChatViewState extends State<ChatView> {
     dynamic alignment;
     dynamic paddingSide;
     dynamic boxColor;
-    if (data['senderID'] == _fireauth.currentUser!.uid) {
+    if (data['senderID'] == currentUserID) {
       alignment = Alignment.centerRight;
       paddingSide = const EdgeInsets.only(right: 10.0);
       boxColor = Pallete.colorDim2;

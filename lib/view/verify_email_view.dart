@@ -1,7 +1,7 @@
 import 'package:cligo/constants/colors.dart';
 import 'package:cligo/constants/routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cligo/constants/variables.dart';
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({super.key});
@@ -11,10 +11,11 @@ class VerifyEmailView extends StatefulWidget {
 }
 
 class _VerifyEmailViewState extends State<VerifyEmailView> {
-  final user = FirebaseAuth.instance.currentUser?.email;
-
   @override
   Widget build(BuildContext context) {
+    //get variables
+    variables();
+    
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -40,7 +41,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Pe adresa de email: $user am trimis un link de verificare',
+                'Pe adresa de email: $currentUserEmail am trimis un link de verificare',
                 style: const TextStyle(color: Pallete.colorDim4, fontSize: 25),
               ),
               Row(
@@ -54,8 +55,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                   ),
                   TextButton(
                     onPressed: () async {
-                      final user = FirebaseAuth.instance.currentUser;
-                      user?.sendEmailVerification();
+                      currentUser?.sendEmailVerification();
                     },
                     child: const Text(
                       "Retrimite",

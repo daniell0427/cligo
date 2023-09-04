@@ -1,9 +1,25 @@
-import 'package:cligo/constants/images.dart';
 import 'package:flutter/material.dart';
 import 'package:cligo/constants/colors.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class CalatorieItem extends StatefulWidget {
-  const CalatorieItem({Key? key}) : super(key: key);
+  final String pfp;
+  final String userName;
+  final String location;
+  final String destination;
+  final int seats;
+  final String date;
+
+  const CalatorieItem({
+    Key? key,
+    required this.date,
+    required this.destination,
+    required this.location,
+    required this.pfp,
+    required this.seats,
+    required this.userName,
+  }) : super(key: key);
 
   @override
   State<CalatorieItem> createState() => _CalatorieItemState();
@@ -11,7 +27,18 @@ class CalatorieItem extends StatefulWidget {
 
 class _CalatorieItemState extends State<CalatorieItem> {
   @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    //format date and split the string
+    DateTime date = DateFormat('yy-MM-dd').parse(widget.date);
+    var formattedDate = DateFormat.yMMMd('ro').format(date);
+    var dateSplitted = formattedDate.split(' ');
+
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
       decoration: BoxDecoration(
@@ -49,22 +76,26 @@ class _CalatorieItemState extends State<CalatorieItem> {
                     //   width: 2.0, // Border width
                     // ),
                   ),
-                  child: const CircleAvatar(
+
+                  //profile picture
+                  child: CircleAvatar(
                     radius: 25,
-                    backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                    backgroundImage: AssetImage(defaultAvatar),
+                    backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                    backgroundImage: AssetImage(widget.pfp),
                   ),
                 ),
               ),
+
+              //ad sender userName
               Container(
                 constraints: const BoxConstraints(maxWidth: 80),
-                child: const Center(
+                child: Center(
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
                     alignment: Alignment.center,
                     child: Text(
-                      'Ciocan Daniel',
-                      style: TextStyle(
+                      widget.userName,
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         color: Pallete.textColor,
@@ -81,42 +112,55 @@ class _CalatorieItemState extends State<CalatorieItem> {
           ),
           Column(
             children: [
+              //location and destination text
               Container(
                 constraints: const BoxConstraints(maxWidth: 180),
-                child: const SingleChildScrollView(
+                child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Align(
                     alignment: Alignment.center,
-                    child: Text("Nisporeni - Cluj",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                            color: Pallete.textColor)),
+                    child: Text(
+                      "${widget.location} - ${widget.destination}",
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          color: Pallete.textColor),
+                    ),
                   ),
                 ),
               ),
-              const Text('2 locuri',
-                  style: TextStyle(fontSize: 16, color: Pallete.textColor)),
+
+              //number of seats
+              Text(
+                '${widget.seats} locuri',
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Pallete.textColor,
+                ),
+              ),
             ],
           ),
           const SizedBox(
             width: 10,
           ),
-          const Align(
+
+          //date text
+          Align(
             alignment: Alignment.centerLeft,
             child: Column(
               children: [
                 Text(
-                  "12",
-                  style: TextStyle(
+                  dateSplitted[0],
+                  style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
                       color: Pallete.textColor),
                 ),
                 Text(
-                  'august',
-                  style: TextStyle(fontSize: 16, color: Pallete.textColor),
-                )
+                  dateSplitted[1].substring(0, dateSplitted[1].length - 1),
+                  style:
+                      const TextStyle(fontSize: 16, color: Pallete.textColor),
+                ),
               ],
             ),
           )

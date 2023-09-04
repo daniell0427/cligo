@@ -9,8 +9,10 @@ import '../forms/searchfield_form.dart';
 class SearchBox extends StatefulWidget {
   final String functionName;
   final String textLabel;
+  final Text? textAbove;
   const SearchBox({
     super.key,
+    this.textAbove,
     required this.functionName,
     required this.textLabel,
   });
@@ -74,12 +76,9 @@ class _SearchBoxState extends State<SearchBox> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: Text(
-                  'Cauta ruta:',
-                  style: TextStyle(fontSize: 25, color: Pallete.colorDim3),
-                ),
+               Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: widget.textAbove,
               ),
 
               const SizedBox(
@@ -91,7 +90,7 @@ class _SearchBoxState extends State<SearchBox> {
                 height: 10,
               ),
 
-              //end location form
+              //final location form
               searchfieldForm(_endLocation, _formKey2, 'destinația'),
               const SizedBox(
                 height: 10,
@@ -130,7 +129,6 @@ class _SearchBoxState extends State<SearchBox> {
                 textLabel: widget.textLabel,
                 functionName: widget.functionName,
               )
-              //end searchfield button
             ],
           ),
         ),

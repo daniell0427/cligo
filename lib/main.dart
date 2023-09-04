@@ -5,6 +5,7 @@ import 'package:cligo/view/home_template.dart';
 import 'package:cligo/view/login_view.dart';
 import 'package:cligo/view/profile_view.dart';
 import 'package:cligo/view/register_view.dart';
+import 'package:cligo/view/routes_search_view.dart';
 import 'package:cligo/view/verify_email_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ void main() async {
         profileRoute: (context) => const ProfileView(),
         verifyEmailRoute: (context) => const VerifyEmailView(),
         chatListRoute:(context) => const ChatListView(),
+        routesSearch:(context) => const RouteSearchView(),
       },
     ),
   );

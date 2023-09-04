@@ -1,3 +1,4 @@
+import 'package:cligo/constants/variables.dart';
 import 'package:cligo/features/search_box.dart';
 import 'package:flutter/material.dart';
 import 'package:cligo/constants/colors.dart';
@@ -36,6 +37,9 @@ class _AddViewState extends State<AddView> {
 
   @override
   Widget build(BuildContext context) {
+    //get variables
+    variables();
+
     return Container(
       color: Pallete.colorDim0,
       child: const Padding(

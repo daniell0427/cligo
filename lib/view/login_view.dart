@@ -1,5 +1,7 @@
 import 'package:cligo/constants/images.dart';
 import 'package:cligo/constants/routes.dart';
+import 'package:cligo/constants/variables.dart';
+import 'package:cligo/features/create_snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cligo/constants/colors.dart';
@@ -154,37 +156,119 @@ class _LoginState extends State<Login> {
                         )),
                       ),
                       onPressed: () async {
+                        //controllers
                         final email = _email.text;
                         final password = _password.text;
+
+                        SnackBar? message;
+
+                        //sign in method
                         try {
-                          await FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
+                          await fireauth.signInWithEmailAndPassword(
                             email: email,
                             password: password,
                           );
-                          final user = FirebaseAuth.instance.currentUser;
-                          if (user?.emailVerified ?? false) {
+
+                          variables();
+
+                          //email verified => homeView
+                          if (currentUser?.emailVerified ?? false) {
                             Navigator.pushNamedAndRemoveUntil(
                               context,
                               homeRoute,
                               (_) => false,
                             );
-                          } else {
+                          }
+
+                          //email not verified => verifyEmailView
+                          else {
                             Navigator.pushNamedAndRemoveUntil(
                               context,
                               verifyEmailRoute,
                               (_) => false,
                             );
+
+                            message = const SnackBar(
+                              content: Text(
+                                'Verifică email!',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
                           }
                         } on FirebaseAuthException catch (e) {
+                          _password.clear(); //clear password field
+
+                          //user not found
                           if (e.code == 'user-not-found') {
-                            devtools.log('User not found');
-                          } else if (e.code == 'wrong-password') {
-                            devtools.log('Wrong password');
-                          } else {
+                            message = const SnackBar(
+                              content: Text(
+                                'Cont inexistent!',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
+                          }
+
+                          //wrong password
+                          else if (e.code == 'wrong-password') {
+                            message = const SnackBar(
+                              content: Text(
+                                'Parolă incorectă!',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
+                          }
+
+                          //invalid email
+                          else if (e.code == 'invalid-email') {
+                            message = const SnackBar(
+                              content: Text(
+                                'Email invalid!',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
+                          }
+
+                          //other errors
+                          else {
+                            _password.clear(); //clear password field
+
+                            message = const SnackBar(
+                              content: Text(
+                                'Ceva neașteptat s-a întâmplat!',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
                             devtools.log(
                                 'Something unexpected happened: Error: ${e.code}');
                           }
+                        }
+
+                        //catch other errors
+                        catch (e) {
+                          message = const SnackBar(
+                            content: Text(
+                              'Ceva neașteptat s-a întâmplat!',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          );
+                          devtools
+                              .log('Something unexpected happened: Error: $e');
+                        }
+
+                        if (message != null) {
+                          createSnackbar(context, message);
                         }
                       },
                       child: const Text(
