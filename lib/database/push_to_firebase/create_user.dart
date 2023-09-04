@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cligo/constants/variables.dart';
 import 'package:intl/intl.dart';
 
 Future pushUserData(
@@ -8,7 +8,7 @@ Future pushUserData(
 ) {
   DateTime now = DateTime.now();
   String formatter = DateFormat('dd/MM/yy').format(now);
-  return FirebaseFirestore.instance.collection('user').doc(uid).set({
+  return firestore.collection('user').doc(uid).set({
     'uid': uid,
     'name': name,
     'email': email,

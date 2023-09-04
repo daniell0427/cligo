@@ -44,16 +44,27 @@ class _BottomNavigationState extends State<BottomNavigation> {
         data: Theme.of(context).copyWith(
           iconTheme: const IconThemeData(color: Pallete.colorDim0),
         ),
-        child: CurvedNavigationBar(
-          color: Pallete.colorDim4,
-          backgroundColor: Colors.transparent,
-          buttonBackgroundColor: Pallete.colorDim4,
-          height: 60.0,
-          items: items,
-          index: index,
-          animationDuration: const Duration(milliseconds: 200),
-          onTap: (index) => setState(
-            () => this.index = index,
+        child: Container(
+          decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Pallete.colorDim4,
+                blurRadius: 40,
+                offset: Offset(0, 0),
+              )
+            ],
+          ),
+          child: CurvedNavigationBar(
+            color: Pallete.colorDim4,
+            backgroundColor: Colors.transparent,
+            buttonBackgroundColor: Pallete.colorDim4,
+            height: 60.0,
+            items: items,
+            index: index,
+            animationDuration: const Duration(milliseconds: 200),
+            onTap: (index) => setState(
+              () => this.index = index,
+            ),
           ),
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:cligo/constants/variables.dart';
 import 'package:cligo/features/search_box.dart';
 import 'package:flutter/material.dart';
 
@@ -35,6 +36,9 @@ class _AddViewState extends State<AddView> {
 
   @override
   Widget build(BuildContext context) {
+    //get variables
+    variables();
+
     return const Padding(
       padding: EdgeInsets.only(
         top: 20.0,

@@ -1,6 +1,4 @@
-import 'package:cligo/constants/images.dart';
-import 'package:cligo/database/show_data/get_user_name.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cligo/constants/variables.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/routes.dart';
@@ -14,17 +12,14 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  //instance of fireauth
-  FirebaseAuth _fireauth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     //get screen size
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    //get user id
-    String uid = _fireauth.currentUser!.uid;
+    //get variables
+    variables();
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -50,7 +45,13 @@ class _ProfileViewState extends State<ProfileView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //numele utilizatorului
-                    GetUserName(uid: uid),
+                    Text(
+                      currentUserName,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 35,
+                      ),
+                    ),
 
                     const Padding(padding: EdgeInsets.only(top: 10)),
 
@@ -88,10 +89,10 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
                       ),
                       child: SizedBox(
-                        width: 85,
+                        width: 105,
                         child: IconButton(
                           icon: Ink.image(
-                            image: const AssetImage(defaultAvatar), //pfp
+                            image: AssetImage(currentPfp), //pfp
                           ),
                           iconSize: 70,
 
@@ -185,7 +186,7 @@ class _ProfileViewState extends State<ProfileView> {
               onPressed: () async {
                 final shouldLogout = await showLogoutDialog(context);
                 if (shouldLogout) {
-                  FirebaseAuth.instance.signOut();
+                  fireauth.signOut();
                   Navigator.of(context)
                       .pushNamedAndRemoveUntil(loginRoute, (_) => false);
                 }

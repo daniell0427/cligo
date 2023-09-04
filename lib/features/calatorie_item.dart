@@ -1,9 +1,25 @@
-import 'package:cligo/constants/images.dart';
 import 'package:flutter/material.dart';
 import 'package:cligo/constants/colors.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class CalatorieItem extends StatefulWidget {
-  const CalatorieItem({Key? key}) : super(key: key);
+  final String pfp;
+  final String userName;
+  final String location;
+  final String destination;
+  final int seats;
+  final String date;
+
+  const CalatorieItem({
+    Key? key,
+    required this.date,
+    required this.destination,
+    required this.location,
+    required this.pfp,
+    required this.seats,
+    required this.userName,
+  }) : super(key: key);
 
   @override
   State<CalatorieItem> createState() => _CalatorieItemState();
@@ -11,109 +27,144 @@ class CalatorieItem extends StatefulWidget {
 
 class _CalatorieItemState extends State<CalatorieItem> {
   @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Container(
-        margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.0),
-          border: Border.all(width: 2, color: Colors.white54),
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Colors.white54, Colors.white10],
-          ),
-        ),
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                ClipRRect(
-                  // Adding ClipRRect for circular shape
-                  borderRadius: BorderRadius.circular(25),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.white30, // Border color
-                        width: 2.0, // Border width
-                      ),
-                    ),
-                    child: const CircleAvatar(
-                      radius: 25,
-                      backgroundColor: Color.fromARGB(255, 200, 200, 200),
-                      backgroundImage: AssetImage(defaultAvatar),
-                    ),
+    //format date and split the string
+    DateTime date = DateFormat('yy-MM-dd').parse(widget.date);
+    var formattedDate = DateFormat.yMMMd('ro').format(date);
+    var dateSplitted = formattedDate.split(' ');
+
+    return Container(
+      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+      decoration: BoxDecoration(
+        // boxShadow: const [
+        //   BoxShadow(
+        //     color: Pallete.colorDim3,
+        //     blurRadius: 5,
+        //     offset: Offset(0, 0),
+        //   )
+        // ],
+        color: const Color.fromARGB(255, 208, 255, 255),
+        borderRadius: BorderRadius.circular(15.0),
+        border: Border.all(width: 2, color: Pallete.colorDim4),
+
+        // gradient: const LinearGradient(
+        //   begin: Alignment.topLeft,
+        //   end: Alignment.bottomRight,
+        //   colors: [Colors.white54, Colors.white10],
+        // ),
+      ),
+      padding: const EdgeInsets.all(15.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            children: [
+              ClipRRect(
+                // Adding ClipRRect for circular shape
+                borderRadius: BorderRadius.circular(25),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    // border: Border.all(
+                    //   color: Pallete.colorDim4, // Border color
+                    //   width: 2.0, // Border width
+                    // ),
+                  ),
+
+                  //profile picture
+                  child: CircleAvatar(
+                    radius: 25,
+                    backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                    backgroundImage: AssetImage(widget.pfp),
                   ),
                 ),
-                Container(
-                  constraints: const BoxConstraints(maxWidth: 80),
-                  child: const Center(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Ciocan Daniel',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Pallete.textColor,
-                        ),
-                        maxLines: 1,
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Column(
-              children: [
-                Container(
-                  constraints: const BoxConstraints(maxWidth: 180),
-                  child: const SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text("Nisporeni - Cluj",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                              color: Pallete.textColor)),
-                    ),
-                  ),
-                ),
-                const Text('2 locuri',
-                    style: TextStyle(fontSize: 16, color: Pallete.textColor)),
-              ],
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Column(
-                children: [
-                  Text(
-                    "12",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                        color: Pallete.textColor),
-                  ),
-                  Text(
-                    'august',
-                    style: TextStyle(fontSize: 16, color: Pallete.textColor),
-                  )
-                ],
               ),
-            )
-          ],
-        ),
+
+              //ad sender userName
+              Container(
+                constraints: const BoxConstraints(maxWidth: 80),
+                child: Center(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.center,
+                    child: Text(
+                      widget.userName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Pallete.textColor,
+                      ),
+                      maxLines: 1,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Column(
+            children: [
+              //location and destination text
+              Container(
+                constraints: const BoxConstraints(maxWidth: 180),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "${widget.location} - ${widget.destination}",
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          color: Pallete.textColor),
+                    ),
+                  ),
+                ),
+              ),
+
+              //number of seats
+              Text(
+                '${widget.seats} locuri',
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Pallete.textColor,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+
+          //date text
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              children: [
+                Text(
+                  dateSplitted[0],
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      color: Pallete.textColor),
+                ),
+                Text(
+                  dateSplitted[1].substring(0, dateSplitted[1].length - 1),
+                  style:
+                      const TextStyle(fontSize: 16, color: Pallete.textColor),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

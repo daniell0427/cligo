@@ -15,14 +15,15 @@ class _SearchDataState extends State<SearchData> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
-      width: 100,
+      height: 55,
+      //width: 100,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Colors.white54, Colors.white10],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ),
+        // gradient: const LinearGradient(
+        //   colors: [Colors.white54, Colors.white10],
+        //   begin: Alignment.centerLeft,
+        //   end: Alignment.centerRight,
+        // ),
+        color: Pallete.colorDim0,
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: TextFormField(
@@ -34,20 +35,20 @@ class _SearchDataState extends State<SearchData> {
         ),
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.calendar_today_rounded),
-          prefixIconColor: Colors.white,
-          labelText: 'Data',
-          labelStyle: const TextStyle(color: Colors.white),
+          prefixIconColor: Pallete.colorDim4,
+          labelText: 'data',
+          labelStyle: const TextStyle(color: Pallete.colorDim4),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(
-              color: Colors.white60,
+              color: Pallete.colorDim4,
               width: 2,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(
-              color: Colors.white60,
+              color: Pallete.colorDim4,
               width: 2,
             ),
           ),

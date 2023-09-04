@@ -1,6 +1,12 @@
-import 'package:cligo/database/read_data/user_advertisment.dart';
+import 'package:cligo/constants/routes.dart';
+import 'package:cligo/constants/variables.dart';
+import 'package:cligo/database/functions/route_service.dart';
+import 'package:cligo/features/create_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:cligo/constants/colors.dart';
+import 'package:intl/intl.dart';
+
+import '../database/push_to_firebase/create_user_ad.dart';
 
 class SearchfieldButton extends StatelessWidget {
   final GlobalKey<FormState> formKey1;
@@ -31,14 +37,16 @@ class SearchfieldButton extends StatelessWidget {
       height: 60,
       child: ElevatedButton(
         style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.all(Pallete.colorDim0),
-            backgroundColor: MaterialStateProperty.all(Pallete.colorDim4),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
+          foregroundColor: MaterialStateProperty.all(Pallete.colorDim0),
+          backgroundColor: MaterialStateProperty.all(Pallete.colorDim4),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
-              side: const BorderSide(color: Pallete.colorDim0, width: 2),
-            ))),
-        onPressed: () {
+              //side: const BorderSide(color: Pallete.colorDim0, width: 2),
+            ),
+          ),
+        ),
+        onPressed: () async {
           FocusManager.instance.primaryFocus?.unfocus(); //close keyboard
 
           //validators
@@ -50,7 +58,7 @@ class SearchfieldButton extends StatelessWidget {
 
           //get the info from fields and assign it to variables
           final startLocation = locationController.text;
-          final endLocation = destinationController.text;
+          final destination = destinationController.text;
           final date = dateController.text;
           late int? seats;
           if (seatsController.text != '') {
@@ -58,55 +66,63 @@ class SearchfieldButton extends StatelessWidget {
           } else {
             seats = null;
           }
-          print("$startLocation $endLocation $date $seats");
+          //format date
+          DateTime date2 = DateFormat('dd-MM-yy').parse(date);
+          var formattedDate = DateFormat('yy-MM-dd').format(date2);
+
+          SnackBar? message;
 
           //what to do based on parameter 'functionName:'
-          SnackBar message;
 
-          //for add_view
-          if (isValid == true) {
+          if (isValid == true && seats != null && date != '') {
+            //for add_view
             if (functionName == 'pushToDatabase') {
-              if (seats != null &&
-                  startLocation != '' &&
-                  endLocation != '' &&
-                  date != '') {
-                pushUserAdData(
-                    startLocation, endLocation, date, seats); //send ad
-                locationController.clear(); //clear field
-                destinationController.clear(); //clear field
-                dateController.clear(); //clear field
-                seatsController.clear(); //clear field
-                message = const SnackBar(
-                  content: Text(
-                    'Anunțul tău a fost trimis!',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                );
-              } else {
-                message = const SnackBar(
-                  content: Text(
-                    'Completați toate spațiile!',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                );
-              }
-            }
+              //push add to database
+              pushUserAdData(
+                currentUserID,
+                currentUserName,
+                startLocation,
+                destination,
+                formattedDate,
+                seats,
+                currentPfp,
+              );
 
-            //for homeview
-            else if (functionName == 'takeFromDatabase') {
+              locationController.clear(); //clear field
+              destinationController.clear(); //clear field
+              dateController.clear(); //clear field
+              seatsController.clear(); //clear field
+
+              //snackbar message
               message = const SnackBar(
                 content: Text(
-                  'haha',
+                  'Anunțul tău a fost trimis!',
                   style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
               );
-            } else {
+            }
+
+            //for homeview
+            else if (functionName == 'takeFromDatabase') {
+              variables(); //empty mathingRouteIDs list
+
+              //get route ids && filter them
+              await RouteService().getMatchingIDs(
+                startLocation,
+                destination,
+                formattedDate,
+                seats,
+              );
+
+              //get RouteSearchView
+              Navigator.of(context).pushNamed(routesSearch);
+            }
+
+            //if error in functionName variable
+            else {
+              //snackbar message
               message = const SnackBar(
                 content: Text(
                   'Ups, ceva neașteptat s-a întâmplat! Dacă eroarea persistă contactați-ne!',
@@ -116,7 +132,21 @@ class SearchfieldButton extends StatelessWidget {
                 ),
               );
             }
-            ScaffoldMessenger.of(context).showSnackBar(message); //show snackbar
+          }
+
+          //in case textfields are not compleated
+          else {
+            message = const SnackBar(
+              content: Text(
+                'Completați toate spațiile!',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            );
+          }
+          if (message != null) {
+            createSnackbar(context, message); //show snackbar
           }
         },
         child: Text(

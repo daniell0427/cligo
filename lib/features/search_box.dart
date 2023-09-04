@@ -1,3 +1,4 @@
+import 'package:cligo/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'searchfield_form_button.dart';
@@ -8,8 +9,10 @@ import '../forms/searchfield_form.dart';
 class SearchBox extends StatefulWidget {
   final String functionName;
   final String textLabel;
+  final Text? textAbove;
   const SearchBox({
     super.key,
+    this.textAbove,
     required this.functionName,
     required this.textLabel,
   });
@@ -51,25 +54,44 @@ class _SearchBoxState extends State<SearchBox> {
     return Center(
       child: FittedBox(
         child: Container(
+          margin: const EdgeInsets.all(10),
           width: 400,
           decoration: BoxDecoration(
-              color: const Color.fromARGB(127, 14, 54, 79),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Colors.white60,
-                width: 2,
-              )),
+            boxShadow: const [
+              BoxShadow(
+                color: Pallete.colorDim3,
+                blurRadius: 5,
+                offset: Offset(0, 0),
+              )
+            ],
+            color: const Color.fromARGB(255, 208, 255, 255),
+            borderRadius: BorderRadius.circular(10),
+            // border: Border.all(
+            //   color: Pallete.colorDim3,
+            //   width: 2,
+            // )
+          ),
           padding: const EdgeInsets.all(10),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+               Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: widget.textAbove,
+              ),
+
+              const SizedBox(
+                height: 5,
+              ),
               //start location form
-              searchfieldForm(_startLocation, _formKey1, 'Locația'),
+              searchfieldForm(_startLocation, _formKey1, 'locația'),
               const SizedBox(
                 height: 10,
               ),
 
-              //end location form
-              searchfieldForm(_endLocation, _formKey2, 'Destinația'),
+              //final location form
+              searchfieldForm(_endLocation, _formKey2, 'destinația'),
               const SizedBox(
                 height: 10,
               ),
@@ -107,7 +129,6 @@ class _SearchBoxState extends State<SearchBox> {
                 textLabel: widget.textLabel,
                 functionName: widget.functionName,
               )
-              //end searchfield button
             ],
           ),
         ),
