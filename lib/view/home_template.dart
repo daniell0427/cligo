@@ -41,7 +41,10 @@ class _HomeViewState extends State<HomeView> {
                 onPressed: () {
                   Navigator.pushNamed(context, profileRoute);
                 },
-                icon: Image.asset(defaultAvatar),
+                icon: const Icon(
+                  Icons.account_circle,
+                  color: Pallete.colorDim0,
+                ),
                 iconSize: 50,
               )
             ],

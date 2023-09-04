@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cligo/constants/colors.dart';
+import 'package:flutter/src/widgets/scroll_controller.dart';
 
 class ChatView extends StatefulWidget {
   final String receiverUserName;
@@ -20,7 +21,7 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
-  // late ScrollController _scrollController;
+  //late ScrollController _scrollController;
   //Text edditing controllers
   late final TextEditingController _message;
 
@@ -28,7 +29,8 @@ class _ChatViewState extends State<ChatView> {
   void initState() {
     _message = TextEditingController();
     super.initState();
-    // _scrollController = ScrollController();
+    //_scrollController = ScrollController();
+
     // WidgetsBinding.instance.addPostFrameCallback((_) {
     //   _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
     // });
@@ -78,7 +80,7 @@ class _ChatViewState extends State<ChatView> {
           body: Container(
             color: Pallete.colorDim0,
             child: Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: 0.0),
               child: Column(
                 children: [
                   //show previous messages
@@ -153,7 +155,8 @@ class _ChatViewState extends State<ChatView> {
       stream: ChatServices()
           .getMessages(_fireauth.currentUser!.uid, widget.receiverUserID),
       builder: (context, snapshot) {
-        //if error
+        //if error]
+
         if (snapshot.hasError) {
           return Text('Eroare: ${snapshot.error}');
         }
@@ -165,8 +168,13 @@ class _ChatViewState extends State<ChatView> {
         //if there are messages to show show them
         if (snapshot.data!.docs.isNotEmpty) {
           return ListView(
+            padding: const EdgeInsets.only(top: 10),
+            //controller: _scrollController,
+            reverse: true,
             children: snapshot.data!.docs
                 .map((doc) => buildMessageItem(doc))
+                .toList()
+                .reversed
                 .toList(),
           );
         }
@@ -180,7 +188,7 @@ class _ChatViewState extends State<ChatView> {
               height: screenHeight * 0.15,
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Pallete.colorDim1,
+                  color: Color.fromARGB(255, 208, 255, 255),
                   borderRadius: BorderRadius.all(
                     Radius.circular(10.0),
                   ),
@@ -309,7 +317,7 @@ class _ChatViewState extends State<ChatView> {
                             child: Text(
                               data['message'],
                               style: const TextStyle(
-                                  fontSize: 25, color: Pallete.textColor),
+                                  fontSize: 22, color: Pallete.textColor),
                               maxLines: 1000,
                               softWrap: true,
                               overflow: TextOverflow.ellipsis,
