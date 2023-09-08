@@ -54,17 +54,17 @@ class _SearchBoxState extends State<SearchBox> {
     return Center(
       child: FittedBox(
         child: Container(
-          margin: const EdgeInsets.all(10),
+          //margin: const EdgeInsets.all(10),
           width: 400,
           decoration: BoxDecoration(
             boxShadow: const [
-              BoxShadow(
-                color: Pallete.colorDim3,
-                blurRadius: 5,
-                offset: Offset(0, 0),
-              )
+              // BoxShadow(
+              //   color: Pallete.colorDim3,
+              //   blurRadius: 5,
+              //   offset: Offset(0, 0),
+              // )
             ],
-            color: const Color.fromARGB(255, 208, 255, 255),
+            //color: const Color.fromARGB(255, 208, 255, 255),
             borderRadius: BorderRadius.circular(10),
             // border: Border.all(
             //   color: Pallete.colorDim3,
@@ -76,7 +76,7 @@ class _SearchBoxState extends State<SearchBox> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               Padding(
+              Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: widget.textAbove,
               ),

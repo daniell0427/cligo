@@ -55,17 +55,15 @@ class _ChatViewState extends State<ChatView> {
     }
   }
 
-
   //CHAT VIEW
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-
     //get variables
     variables();
-    
+
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -153,8 +151,7 @@ class _ChatViewState extends State<ChatView> {
   //LIST OF ITEMS
   Widget buildMessageList(screenWidth, screenHeight) {
     return StreamBuilder(
-      stream: ChatServices()
-          .getMessages(currentUserID, widget.receiverUserID),
+      stream: ChatServices().getMessages(currentUserID, widget.receiverUserID),
       builder: (context, snapshot) {
         //if error]
 
@@ -311,6 +308,7 @@ class _ChatViewState extends State<ChatView> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(12, 8, 0, 8),
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           //message
 
@@ -327,7 +325,7 @@ class _ChatViewState extends State<ChatView> {
 
                           //timestamp
                           Padding(
-                            padding: const EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 10, left: 5),
                             child: Text(
                               hourMinuteSent,
                               style: const TextStyle(fontSize: 12),
@@ -350,7 +348,10 @@ class _ChatViewState extends State<ChatView> {
   //SHOW DATE
   Widget showDate(String? dateShow) {
     if (dateShow != null) {
-      return Text(dateShow);
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: Text(dateShow),
+      );
     } else {
       return Container();
     }

@@ -40,7 +40,7 @@ class _CalatorieItemState extends State<CalatorieItem> {
     var dateSplitted = formattedDate.split(' ');
 
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+      margin: const EdgeInsets.fromLTRB(15, 7, 15, 7),
       decoration: BoxDecoration(
         // boxShadow: const [
         //   BoxShadow(
@@ -59,7 +59,7 @@ class _CalatorieItemState extends State<CalatorieItem> {
         //   colors: [Colors.white54, Colors.white10],
         // ),
       ),
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.fromLTRB(8, 15, 8, 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -79,7 +79,7 @@ class _CalatorieItemState extends State<CalatorieItem> {
 
                   //profile picture
                   child: CircleAvatar(
-                    radius: 25,
+                    radius: 28,
                     backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                     backgroundImage: AssetImage(widget.pfp),
                   ),
@@ -108,13 +108,13 @@ class _CalatorieItemState extends State<CalatorieItem> {
             ],
           ),
           const SizedBox(
-            width: 10,
+            width: 0,
           ),
           Column(
             children: [
               //location and destination text
               Container(
-                constraints: const BoxConstraints(maxWidth: 180),
+                constraints: const BoxConstraints(maxWidth: 220),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Align(
@@ -141,7 +141,7 @@ class _CalatorieItemState extends State<CalatorieItem> {
             ],
           ),
           const SizedBox(
-            width: 10,
+            width: 0,
           ),
 
           //date text

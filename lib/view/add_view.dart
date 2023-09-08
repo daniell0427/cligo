@@ -52,6 +52,13 @@ class _AddViewState extends State<AddView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Text(
+              'Adaugă o rută',
+              style: TextStyle(
+                fontSize: 40,
+                color: Pallete.colorDim4,
+              ),
+            ),
             //searchbox
             SearchBox(textLabel: 'Adaugă', functionName: 'pushToDatabase'),
           ],

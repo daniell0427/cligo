@@ -52,16 +52,17 @@ class _ProfileViewState extends State<ProfileView> {
                       Container(
                         constraints: BoxConstraints(maxWidth: 280),
                         child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            alignment: Alignment.center,
-                            child: Text(
-                      currentUserName,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 35,
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.center,
+                          child: Text(
+                            currentUserName,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 35,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                      ),),
 
                       const Padding(padding: EdgeInsets.only(top: 5)),
 
@@ -164,7 +165,7 @@ class _ProfileViewState extends State<ProfileView> {
 
           //settings
           Padding(
-            padding: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 0),
             child: SizedBox(
               width: screenWidth,
               height: screenHeight * 0.08,

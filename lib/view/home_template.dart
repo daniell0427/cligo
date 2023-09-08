@@ -23,31 +23,45 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         toolbarHeight: 70,
         backgroundColor: Pallete.colorDim4,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-            ),
+        // flexibleSpace: Container(
+        //   decoration: const BoxDecoration(
+        //     borderRadius: BorderRadius.only(
+        //       bottomLeft: Radius.circular(20),
+        //       bottomRight: Radius.circular(20),
+        //     ),
+        //   ),
+        // ),
+        leadingWidth: 150,
+        leading: const Padding(
+          padding: EdgeInsets.only(left: 8.0),
+          child: Row(
+            children: [
+              Flexible(
+                child: CircleAvatar(
+                  radius: 30,
+                  backgroundImage: AssetImage(placeHolderLogo),
+                  backgroundColor: Colors.transparent,
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  'Cligo',
+                  style: TextStyle(fontSize: 25),
+                ),
+              )
+            ],
           ),
         ),
         actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const CircleAvatar(
-                radius: 40,
-                backgroundImage: AssetImage(placeHolderLogo),
-                backgroundColor: Colors.transparent,
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, profileRoute);
-                },
-                icon: Image.asset(currentPfp),
-                iconSize: 50,
-              )
-            ],
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, profileRoute);
+            },
+            icon: const Icon(
+              Icons.account_circle,
+              color: Pallete.colorDim0,
+            ),
+            iconSize: 50,
           )
         ],
       ),
