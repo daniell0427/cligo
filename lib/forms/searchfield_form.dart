@@ -32,7 +32,7 @@ searchfieldForm(controllerValue, formkey, myLabelText) {
             if (!mylist.cities.values.elementAt(0).contains(x) &&
                     !mylist.cities.values.elementAt(1).contains(x) ||
                 x!.isEmpty) {
-              return 'Introduceți o locație valabilă!';
+              return null;
             }
             return null;
           },

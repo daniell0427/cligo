@@ -6,7 +6,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:cligo/constants/colors.dart';
 
 class BottomNavigation extends StatefulWidget {
-  const BottomNavigation({super.key});
+  const BottomNavigation({Key? key});
 
   @override
   State<BottomNavigation> createState() => _BottomNavigationState();
@@ -19,6 +19,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
     AddView(),
     ChatListView(),
   ];
+
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController(initialPage: index);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +47,19 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
     return Scaffold(
       extendBody: true,
-      body: screen[index],
+      body: PageView(
+        controller: pageController,
+        children: screen,
+        onPageChanged: (pageIndex) {
+          setState(() {
+            index = pageIndex;
+          });
+        },
+      ),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-          iconTheme: const IconThemeData(color: Pallete.colorDim0),
+          iconTheme: const IconThemeData(
+              color: Pallete.colorDim0), // Customize your icon color here
         ),
         child: Container(
           decoration: const BoxDecoration(
@@ -55,19 +72,31 @@ class _BottomNavigationState extends State<BottomNavigation> {
             ],
           ),
           child: CurvedNavigationBar(
-            color: Pallete.colorDim4,
+            color:
+                Pallete.colorDim4, // Customize your navigation bar color here
             backgroundColor: Colors.transparent,
-            buttonBackgroundColor: Pallete.colorDim4,
+            buttonBackgroundColor: Pallete
+                .colorDim4, // Customize your button background color here
             height: 60.0,
             items: items,
             index: index,
             animationDuration: const Duration(milliseconds: 200),
-            onTap: (index) => setState(
-              () => this.index = index,
-            ),
+            onTap: (pageIndex) {
+              pageController.animateToPage(
+                pageIndex,
+                duration: const Duration(milliseconds: 100),
+                curve: Curves.easeInOut,
+              );
+            },
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
 }
