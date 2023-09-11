@@ -46,8 +46,8 @@ class _AddViewState extends State<AddView> {
         padding: EdgeInsets.only(
           top: 80.0,
           bottom: 5.0,
-          left: 5.0,
-          right: 5.0,
+          left: 10.0,
+          right: 10.0,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

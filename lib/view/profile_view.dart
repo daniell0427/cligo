@@ -1,4 +1,5 @@
 import 'package:cligo/constants/variables.dart';
+import 'package:cligo/view/cursele_mele_view.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
@@ -50,7 +51,7 @@ class _ProfileViewState extends State<ProfileView> {
                     children: [
                       //numele utilizatorului
                       Container(
-                        constraints: BoxConstraints(maxWidth: 280),
+                        constraints: const BoxConstraints(maxWidth: 280),
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
                           alignment: Alignment.center,
@@ -142,7 +143,12 @@ class _ProfileViewState extends State<ProfileView> {
                 style: const ButtonStyle(
                   alignment: Alignment.centerLeft,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CurseleMeleView()));
+                },
                 child: const Row(
                   children: [
                     Icon(

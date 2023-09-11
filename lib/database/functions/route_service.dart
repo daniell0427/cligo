@@ -62,7 +62,7 @@ class RouteService extends ChangeNotifier {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  color: Color.fromARGB(92, 158, 158, 158),
+                  color: const Color.fromARGB(92, 158, 158, 158),
                   border: Border.all(
                     color: Colors.black,
                     width: 1,

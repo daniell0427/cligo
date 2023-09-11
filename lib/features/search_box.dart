@@ -85,7 +85,7 @@ class _SearchBoxState extends State<SearchBox> {
                 height: 5,
               ),
               //start location form
-              searchfieldForm(_startLocation, _formKey1, 'locația'),
+              searchfieldForm(_startLocation, _formKey1, 'pornire'),
               const SizedBox(
                 height: 10,
               ),

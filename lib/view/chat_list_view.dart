@@ -20,10 +20,9 @@ class _ChatListViewState extends State<ChatListView> {
   }
 
   Widget displayChats() {
-
     //get variables
     variables();
-    
+
     return StreamBuilder(
       stream: firestore.collection('user').snapshots(),
       builder: (context, snapshot) {
@@ -57,13 +56,13 @@ class _ChatListViewState extends State<ChatListView> {
     //display users without current user
     if (currentUserEmail != data['email']) {
       return ListTile(
+        contentPadding: const EdgeInsets.all(0),
         title: Container(
           decoration: const BoxDecoration(
               border: Border(
             bottom: BorderSide(
-              color: Color.fromARGB(
-                  207, 14, 54, 79), // You can change the border color here
-              width: 2.0, // You can adjust the border width here
+              color: Pallete.colorDim4,
+              width: 2.0,
             ),
           )),
           child: Padding(
@@ -80,9 +79,9 @@ class _ChatListViewState extends State<ChatListView> {
                       //   width: 2.0, // Border width
                       // ),
                     ),
-                    child:  CircleAvatar(
-                      radius: 25,
-                      backgroundColor: const  Color.fromARGB(255, 200, 200, 200),
+                    child: CircleAvatar(
+                      radius: 28,
+                      backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                       backgroundImage: AssetImage(currentPfp),
                     ),
                   ),
@@ -92,7 +91,7 @@ class _ChatListViewState extends State<ChatListView> {
                 ), //*for padding
                 Text(
                   data['name'],
-                  style: const TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 23),
                 ),
               ],
             ),
