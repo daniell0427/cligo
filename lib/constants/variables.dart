@@ -12,9 +12,11 @@ String? currentUserEmail;
 late String currentUserName;
 late String currentPfp;
 
-//ads variables
+//routes variables
 List routeIDs = [];
 List matchingRoutesIDs = [];
+List myRouteIDs = [];
+
 
 void variables() {
   //user var
@@ -27,4 +29,5 @@ void variables() {
   //ads var
   matchingRoutesIDs = [];
   routeIDs = [];
+  myRouteIDs = [];
 }

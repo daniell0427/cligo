@@ -1,6 +1,5 @@
 import 'package:cligo/constants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:cligo/database/functions/route_service.dart';
 import '../features/search_box.dart';
 
 class EditSearchView extends StatefulWidget {
@@ -26,8 +25,9 @@ class _EditSearchViewState extends State<EditSearchView> {
       ),
       body: Container(
         color: Pallete.colorDim0,
-        child: const Column(
-            children: [SearchBox(functionName: 'null', textLabel: 'Schimbă')]),
+        child: const Column(children: [
+          SearchBox(functionName: 'takeFromDatabase', textLabel: 'Schimbă')
+        ]),
       ),
     );
   }

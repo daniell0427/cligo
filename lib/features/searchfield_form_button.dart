@@ -1,6 +1,6 @@
 import 'package:cligo/constants/routes.dart';
 import 'package:cligo/constants/variables.dart';
-import 'package:cligo/database/functions/route_service.dart';
+import 'package:cligo/database/services/route_service.dart';
 import 'package:cligo/features/create_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:cligo/constants/colors.dart';
@@ -66,15 +66,16 @@ class SearchfieldButton extends StatelessWidget {
           } else {
             seats = null;
           }
-          //format date
-          DateTime date2 = DateFormat('dd-MM-yy').parse(date);
-          var formattedDate = DateFormat('yy-MM-dd').format(date2);
 
           SnackBar? message;
 
           //what to do based on parameter 'functionName:'
 
           if (isValid == true && seats != null && date != '') {
+            //format date
+            DateTime date2 = DateFormat('dd-MM-yy').parse(date);
+            var formattedDate = DateFormat('yy-MM-dd').format(date2);
+
             //for add_view
             if (functionName == 'pushToDatabase') {
               //push add to database

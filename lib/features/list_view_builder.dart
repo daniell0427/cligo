@@ -38,12 +38,14 @@ class _ListViewBuilderState extends State<ListViewBuilder> {
 
               //calatorie items
               return CalatorieItem(
-                  date: snapshotData['date'],
-                  destination: snapshotData['destination'],
-                  location: snapshotData['location'],
-                  pfp: snapshotData['sender_pfp'],
-                  seats: snapshotData['available_seats'],
-                  userName: snapshotData['sender_name']);
+                date: snapshotData['date'],
+                destination: snapshotData['destination'],
+                location: snapshotData['location'],
+                pfp: snapshotData['sender_pfp'],
+                seats: snapshotData['available_seats'],
+                userName: snapshotData['sender_name'],
+                userID: snapshotData['sender_ID'],
+              );
             },
           );
         },

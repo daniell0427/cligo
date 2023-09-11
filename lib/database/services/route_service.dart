@@ -2,6 +2,7 @@ import 'package:cligo/constants/variables.dart';
 import 'package:cligo/features/list_view_builder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class RouteService extends ChangeNotifier {
   //collection reference
@@ -24,7 +25,8 @@ class RouteService extends ChangeNotifier {
               //filter results
               if (location == fields['location'] &&
                   destination == fields['destination'] &&
-                  date == fields['date']) {
+                  date == fields['date'] &&
+                  seats <= fields['available_seats']) {
                 matchingRoutesIDs.add(id);
               }
             },
@@ -50,8 +52,13 @@ class RouteService extends ChangeNotifier {
 
         //if there are messages to show show them
         if (snapshot.data!.docs.isNotEmpty) {
-          for (var doc in snapshot.data.docs) {
-            routeIDs.add(doc.id);
+          for (dynamic doc in snapshot.data.docs) {
+            DateTime date = DateFormat('yy-MM-dd').parse(doc['date']);
+            if (date.compareTo(DateTime.now()) > 0) {
+              routeIDs.add(doc.id);
+            } else {
+              data.doc(doc.id).delete();
+            }
           }
           return ListViewBuilder(
               emptyText: 'Nu sunt rute disponibile la moment!', ids: routeIDs);
@@ -92,6 +99,16 @@ class RouteService extends ChangeNotifier {
               ),
             ),
           );
+        }
+      },
+    );
+  }
+
+  Future getMyRoutesID() async {
+    await data.where('sender_ID', isEqualTo: currentUserID).get().then(
+      (snapshot) {
+        for (var doc in snapshot.docs) {
+          myRouteIDs.add(doc.id);
         }
       },
     );

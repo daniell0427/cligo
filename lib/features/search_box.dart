@@ -1,4 +1,3 @@
-import 'package:cligo/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'searchfield_form_button.dart';

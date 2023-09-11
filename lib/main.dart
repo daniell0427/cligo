@@ -25,11 +25,12 @@ void main() async {
           // This is the theme of your application.
           primarySwatch: Colors.blue),
       home: const LayoutPage(),
+
       routes: {
         loginRoute: (context) => const Login(),
         registerRoute: (context) => const Register(),
         homeRoute: (context) => const HomeView(),
-        profileRoute: (context) => const ProfileView(),
+        profileRoute: (context) => const ProfileView(urProfile: true),
         verifyEmailRoute: (context) => const VerifyEmailView(),
         chatListRoute:(context) => const ChatListView(),
         routesSearch:(context) => const RouteSearchView(),
@@ -42,6 +43,7 @@ class LayoutPage extends StatelessWidget {
   const LayoutPage({super.key});
   @override
   Widget build(BuildContext context) {
+
     return FutureBuilder(
       future: Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
