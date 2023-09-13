@@ -165,21 +165,24 @@ class _CalatorieItemState extends State<CalatorieItem> {
             //date text
             Align(
               alignment: Alignment.centerLeft,
-              child: Column(
-                children: [
-                  Text(
-                    dateSplitted[0],
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                        color: Pallete.textColor),
-                  ),
-                  Text(
-                    dateSplitted[1].substring(0, dateSplitted[1].length - 1),
-                    style:
-                        const TextStyle(fontSize: 16, color: Pallete.textColor),
-                  ),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.only(left: 5, right: 5),
+                child: Column(
+                  children: [
+                    Text(
+                      dateSplitted[0],
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          color: Pallete.textColor),
+                    ),
+                    Text(
+                      dateSplitted[1].substring(0, dateSplitted[1].length - 1),
+                      style: const TextStyle(
+                          fontSize: 16, color: Pallete.textColor),
+                    ),
+                  ],
+                ),
               ),
             )
           ],

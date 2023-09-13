@@ -31,13 +31,13 @@ class _HomeViewState extends State<HomeView> {
                   Container(
                     margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                     decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Pallete.colorDim3,
-                          blurRadius: 5,
-                          offset: Offset(0, 0),
-                        )
-                      ],
+                      // boxShadow: const [
+                      //   BoxShadow(
+                      //     color: Pallete.colorDim3,
+                      //     blurRadius: 5,
+                      //     offset: Offset(0, 0),
+                      //   )
+                      // ],
                       color: const Color.fromARGB(255, 208, 255, 255),
                       borderRadius: BorderRadius.circular(10),
                       // border: Border.all(

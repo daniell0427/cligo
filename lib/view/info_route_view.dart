@@ -2,7 +2,7 @@ import 'package:cligo/features/screen_size.dart';
 import 'package:cligo/view/profile_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cligo/constants/colors.dart';
 import 'chat_view.dart';
 
 class InfoRouteView extends StatefulWidget {
@@ -32,32 +32,52 @@ class _InfoRouteViewState extends State<InfoRouteView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text('no idea')),
+      appBar: AppBar(
+        //title: const Text('no idea'),
+        backgroundColor: Pallete.colorDim4,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Pallete.colorDim0, size: 40),
+      ),
       body: Container(
-        margin: const EdgeInsets.only(top: 10),
+        color: Pallete.colorDim4,
         child: Column(
           children: [
             //profile picture
-            SizedBox(
-                width: ScreenSize(context).width * 0.2,
-                height: ScreenSize(context).width * 0.2,
-                child: Ink.image(image: AssetImage(widget.userPfp))),
+            CircleAvatar(
+              radius: ScreenSize(context).width * 0.20,
+              backgroundImage: AssetImage(widget.userPfp),
+              backgroundColor: Pallete.colorGray,
+            ),
+            // SizedBox(
+            //     width: ScreenSize(context).width * 0.2,
+            //     height: ScreenSize(context).width * 0.2,
+            //     child: Ink.image(image: AssetImage(widget.userPfp))),
 
             //user name
-            Text(
-              widget.userName,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: ScreenSize(context).width * 0.12,
-                color: Colors.black,
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  widget.userName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: ScreenSize(context).width * 0.12,
+                    fontWeight: FontWeight.normal,
+                    color: Pallete.colorDim0,
+                  ),
+                ),
               ),
             ),
 
             Container(
               margin: const EdgeInsets.all(10),
-              color: const Color.fromARGB(158, 158, 158, 158),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(color: Pallete.colorDim0, width: 2),
+                      top: BorderSide(color: Pallete.colorDim0, width: 2))),
+              //color: const Color.fromARGB(158, 158, 158, 158),
               child: Row(
                 children: [
                   //profile
@@ -72,11 +92,18 @@ class _InfoRouteViewState extends State<InfoRouteView> {
                           userPfp: widget.userPfp,
                         ),
                       )),
-                      icon: const Icon(Icons.person),
+                      icon: const Icon(
+                        Icons.person,
+                        color: Pallete.colorDim0,
+                      ),
                       iconSize: ScreenSize(context).width * 0.15,
                     ),
                   ),
-
+                  Container(
+                    width: 2,
+                    height: 60,
+                    color: Pallete.colorDim0,
+                  ),
                   //send message
                   Expanded(
                     flex: 1,
@@ -89,8 +116,11 @@ class _InfoRouteViewState extends State<InfoRouteView> {
                           ),
                         ),
                       ),
-                      icon: const Icon(Icons.message),
-                      iconSize: ScreenSize(context).width * 0.15,
+                      icon: const Icon(
+                        Icons.message,
+                        color: Pallete.colorDim0,
+                      ),
+                      iconSize: ScreenSize(context).width * 0.14,
                     ),
                   ),
                 ],
@@ -99,7 +129,7 @@ class _InfoRouteViewState extends State<InfoRouteView> {
 
             //route info
             Container(
-              color: const Color.fromARGB(158, 158, 158, 158),
+              //color: const Color.fromARGB(158, 158, 158, 158),
               margin: const EdgeInsets.all(10.0),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,10 +144,11 @@ class _InfoRouteViewState extends State<InfoRouteView> {
                       child: Row(
                         children: [
                           Text(
-                            'Locația: ',
+                            'Pornirea: ',
                             style: TextStyle(
                               fontSize: ScreenSize(context).width * 0.07,
                               fontWeight: FontWeight.bold,
+                              color: Pallete.colorDim0,
                             ),
                           ),
                           Expanded(
@@ -127,6 +158,7 @@ class _InfoRouteViewState extends State<InfoRouteView> {
                               maxLines: 2,
                               style: TextStyle(
                                 fontSize: ScreenSize(context).width * 0.07,
+                                color: Pallete.colorDim0,
                               ),
                             ),
                           ),
@@ -148,6 +180,7 @@ class _InfoRouteViewState extends State<InfoRouteView> {
                             style: TextStyle(
                               fontSize: ScreenSize(context).width * 0.07,
                               fontWeight: FontWeight.bold,
+                              color: Pallete.colorDim0,
                             ),
                           ),
                           Expanded(
@@ -158,6 +191,7 @@ class _InfoRouteViewState extends State<InfoRouteView> {
                               maxLines: 2,
                               style: TextStyle(
                                 fontSize: ScreenSize(context).width * 0.07,
+                                color: Pallete.colorDim0,
                               ),
                             ),
                           ),
@@ -179,6 +213,7 @@ class _InfoRouteViewState extends State<InfoRouteView> {
                             style: TextStyle(
                               fontSize: ScreenSize(context).width * 0.07,
                               fontWeight: FontWeight.bold,
+                              color: Pallete.colorDim0,
                             ),
                           ),
                           Expanded(
@@ -188,6 +223,7 @@ class _InfoRouteViewState extends State<InfoRouteView> {
                               maxLines: 2,
                               style: TextStyle(
                                 fontSize: ScreenSize(context).width * 0.07,
+                                color: Pallete.colorDim0,
                               ),
                             ),
                           ),
@@ -210,6 +246,7 @@ class _InfoRouteViewState extends State<InfoRouteView> {
                             style: TextStyle(
                               fontSize: ScreenSize(context).width * 0.07,
                               fontWeight: FontWeight.bold,
+                              color: Pallete.colorDim0,
                             ),
                           ),
                           Expanded(
@@ -219,6 +256,7 @@ class _InfoRouteViewState extends State<InfoRouteView> {
                               maxLines: 2,
                               style: TextStyle(
                                 fontSize: ScreenSize(context).width * 0.07,
+                                color: Pallete.colorDim0,
                               ),
                             ),
                           ),

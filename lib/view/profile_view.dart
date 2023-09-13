@@ -111,16 +111,14 @@ class _ProfileViewState extends State<ProfileView> {
                           children: <Widget>[
                             SizedBox(
                                 width: 100,
-                                child: IconButton(
-                                  icon: Ink.image(
-                                    image: AssetImage(currentPfp), //pfp
-                                  ),
-                                  iconSize: 70,
-
-                                  //pfp options
-                                  onPressed: () async {
+                                child: GestureDetector(
+                                  onTap: () async {
                                     return await showPfpOptions(context);
                                   },
+                                  child: CircleAvatar(
+                                    radius: 40,
+                                    backgroundImage: AssetImage(currentPfp),
+                                  ),
                                 )),
                             const Positioned(
                               bottom: 0,
