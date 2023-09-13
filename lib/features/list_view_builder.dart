@@ -36,6 +36,14 @@ class _ListViewBuilderState extends State<ListViewBuilder> {
               Map<String, dynamic> snapshotData =
                   snapshot.data!.data() as Map<String, dynamic>;
 
+              //can edit ur route
+              bool editRoute;
+              if (snapshotData['sender_ID'] == currentUserID) {
+                editRoute = true;
+              } else {
+                editRoute = false;
+              }
+
               //calatorie items
               return CalatorieItem(
                 date: snapshotData['date'],
@@ -45,6 +53,7 @@ class _ListViewBuilderState extends State<ListViewBuilder> {
                 seats: snapshotData['available_seats'],
                 userName: snapshotData['sender_name'],
                 userID: snapshotData['sender_ID'],
+                editRoute: editRoute,
               );
             },
           );

@@ -83,7 +83,6 @@ class _ChatViewState extends State<ChatView> {
               child: Column(
                 children: [
                   //show previous messages
-
                   Expanded(child: buildMessageList(screenWidth, screenHeight)),
 
                   //access send_message textfield WIDGET

@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:cligo/constants/images.dart';
 import 'package:cligo/constants/variables.dart';
 import 'package:cligo/database/services/route_service.dart';
+import 'package:cligo/features/screen_size.dart';
 import 'package:cligo/view/my_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../constants/colors.dart';
 import '../constants/routes.dart';
@@ -26,6 +30,8 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
+  late PickedFile _imageFile;
+  final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
     //get screen size
@@ -65,7 +71,7 @@ class _ProfileViewState extends State<ProfileView> {
                       children: [
                         //numele utilizatorului
                         Container(
-                          constraints: BoxConstraints(maxWidth: 280),
+                          constraints: const BoxConstraints(maxWidth: 280),
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             alignment: Alignment.center,
@@ -107,29 +113,66 @@ class _ProfileViewState extends State<ProfileView> {
                     Expanded(
                       child: Align(
                         alignment: Alignment.topRight,
-                        child: Stack(
-                          children: <Widget>[
-                            SizedBox(
-                                width: 100,
-                                child: GestureDetector(
-                                  onTap: () async {
-                                    return await showPfpOptions(context);
-                                  },
-                                  child: CircleAvatar(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Stack(
+                            children: <Widget>[
+                              GestureDetector(
+                                child: CircleAvatar(
                                     radius: 40,
-                                    backgroundImage: AssetImage(currentPfp),
-                                  ),
-                                )),
-                            const Positioned(
-                              bottom: 0,
-                              right: 10,
-                              child: Icon(
-                                Icons.add_circle_outline_rounded,
-                                color: Pallete.colorDim0,
-                                size: 30,
+                                    backgroundImage: defaultAvatar == currentPfp
+                                        ? AssetImage(currentPfp)
+                                        : FileImage(File(currentPfp))
+                                            as ImageProvider),
+                                onTap: () async {
+                                  //show bottomsheet
+                                  await showModalBottomSheet(
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(15),
+                                          topRight: Radius.circular(15)),
+                                    ),
+                                    context: context,
+                                    builder: (context) => bottomSheet(),
+                                  );
+
+                                  //update photo
+                                  await fireauth.currentUser
+                                      ?.updatePhotoURL(_imageFile.path);
+                                  await firestore
+                                      .collection('user')
+                                      .doc(currentUserID)
+                                      .update({'pfp': _imageFile.path});
+
+                                  //refresh page
+                                  setState(() {});
+
+                                  //reset var
+                                  variables();
+
+                                  //get ids
+                                  await RouteService().getMyRoutesID();
+
+                                  for (var id in myRouteIDs) {
+                                    firestore
+                                        .collection('routes')
+                                        .doc(id)
+                                        .update({'sender_pfp': currentPfp});
+                                    print(currentPfp);
+                                  }
+                                },
                               ),
-                            )
-                          ],
+                              const Positioned(
+                                bottom: 0,
+                                right: 0,
+                                child: Icon(
+                                  Icons.add_circle_outline_rounded,
+                                  color: Pallete.colorDim0,
+                                  size: 30,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -384,42 +427,131 @@ class _ProfileViewState extends State<ProfileView> {
       );
     }
   }
-}
 
-Future showPfpOptions(BuildContext context) {
-  return showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        actions: [
-          TextButton(
-            onPressed: () async {
-              await makeSelfie();
-            },
-            child: const Text(
-              'Alege din galerie',
-              style: TextStyle(fontSize: 16),
+  Widget bottomSheet() {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20), color: Pallete.colorDim0),
+      height: 310,
+      width: ScreenSize(context).width,
+      child: Container(
+        margin: const EdgeInsets.symmetric(
+          vertical: 20,
+          horizontal: 20,
+        ),
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 60,
+              backgroundImage: currentPfp != defaultAvatar
+                  ? FileImage(File(currentPfp))
+                  : AssetImage(currentPfp) as ImageProvider,
             ),
-          ),
-          TextButton(
-            onPressed: () async {
-              chooseSelfie();
-            },
-            child: const Text(
-              'Fa o poza',
-              style: TextStyle(fontSize: 16),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 5),
+              child: Container(
+                color: Pallete.colorDim4,
+                width: ScreenSize(context).width,
+                height: 2,
+              ),
             ),
-          ),
-        ],
-      );
-    },
-  );
-}
 
-Future makeSelfie() async {
-  return '';
-}
+            //update photo
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              width: ScreenSize(context).width,
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 208, 255, 255),
+                  border: Border.all(
+                    color: Pallete.colorDim4,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.image_outlined,
+                      color: Pallete.colorDim4,
+                      size: 35,
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        await choosePhoto(ImageSource.gallery);
 
-Future chooseSelfie() async {
-  return '';
+                        //close modal
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        'Actualizează poza',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            //remove photo
+            Container(
+              width: ScreenSize(context).width,
+              //height: 40,
+              margin: const EdgeInsets.only(top: 10),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(51, 236, 46, 46),
+                border: Border.all(
+                  color: Color.fromARGB(255, 255, 17, 0),
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.delete_outline,
+                      color: Color.fromARGB(255, 255, 17, 0),
+                      size: 35,
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        //close modal
+                        Navigator.pop(context);
+
+                        await fireauth.currentUser
+                            ?.updatePhotoURL(defaultAvatar);
+
+                        //refresh page
+                        setState(() {});
+                      },
+                      child: const Text(
+                        'Șterge poza',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 255, 17, 0),
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future choosePhoto(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+
+    setState(() {
+      _imageFile = PickedFile(pickedFile!.path);
+    });
+  }
 }

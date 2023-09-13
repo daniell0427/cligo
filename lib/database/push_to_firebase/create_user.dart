@@ -1,3 +1,4 @@
+import 'package:cligo/constants/images.dart';
 import 'package:cligo/constants/variables.dart';
 import 'package:intl/intl.dart';
 
@@ -12,6 +13,7 @@ Future pushUserData(
     'uid': uid,
     'name': name,
     'email': email,
+    'pfp': defaultAvatar,
     'date_added': formatter,
     'phone': null,
   });

@@ -50,7 +50,7 @@ class RouteService extends ChangeNotifier {
           return Container();
         }
 
-        //if there are messages to show show them
+        //if there are available routes
         if (snapshot.data!.docs.isNotEmpty) {
           for (dynamic doc in snapshot.data.docs) {
             DateTime date = DateFormat('yy-MM-dd').parse(doc['date']);
@@ -62,7 +62,10 @@ class RouteService extends ChangeNotifier {
           }
           return ListViewBuilder(
               emptyText: 'Nu sunt rute disponibile la moment!', ids: routeIDs);
-        } else {
+        }
+
+        //no available routes
+        else {
           return Center(
             child: Padding(
               padding: const EdgeInsets.only(left: 40.0, right: 40.0),
