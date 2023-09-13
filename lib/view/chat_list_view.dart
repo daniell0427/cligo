@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:cligo/constants/images.dart';
 import 'package:cligo/constants/variables.dart';
 import 'package:cligo/view/chat_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,10 +23,9 @@ class _ChatListViewState extends State<ChatListView> {
   }
 
   Widget displayChats() {
-
     //get variables
     variables();
-    
+
     return StreamBuilder(
       stream: firestore.collection('user').snapshots(),
       builder: (context, snapshot) {
@@ -53,7 +55,7 @@ class _ChatListViewState extends State<ChatListView> {
 
   Widget createListView(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-
+    var pfp = data['pfp'];
     //display users without current user
     if (currentUserEmail != data['email']) {
       return ListTile(
@@ -80,10 +82,12 @@ class _ChatListViewState extends State<ChatListView> {
                       //   width: 2.0, // Border width
                       // ),
                     ),
-                    child:  CircleAvatar(
+                    child: CircleAvatar(
                       radius: 25,
-                      backgroundColor: const  Color.fromARGB(255, 200, 200, 200),
-                      backgroundImage: AssetImage(currentPfp),
+                      backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                      backgroundImage: pfp == defaultAvatar
+                          ? AssetImage(pfp)
+                          : FileImage(File(pfp)) as ImageProvider,
                     ),
                   ),
                 ),

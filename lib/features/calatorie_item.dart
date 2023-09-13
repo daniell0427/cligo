@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:cligo/view/info_route_view.dart';
 import 'package:flutter/material.dart';
 import 'package:cligo/constants/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+
+import '../constants/images.dart';
 
 class CalatorieItem extends StatefulWidget {
   final String pfp;
@@ -12,6 +16,7 @@ class CalatorieItem extends StatefulWidget {
   final int seats;
   final String date;
   final String userID;
+  final bool? editRoute;
 
   const CalatorieItem({
     Key? key,
@@ -22,6 +27,7 @@ class CalatorieItem extends StatefulWidget {
     required this.seats,
     required this.userName,
     required this.userID,
+    this.editRoute,
   }) : super(key: key);
 
   @override
@@ -44,19 +50,28 @@ class _CalatorieItemState extends State<CalatorieItem> {
     var dateSplitted = formattedDate.split(' ');
 
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => InfoRouteView(
-            date: formattedDateFull,
-            destination: widget.destination,
-            location: widget.location,
-            seats: widget.seats,
-            userName: widget.userName,
-            userPfp: widget.pfp,
-            userID: widget.userID,
-          ),
-        ),
-      ),
+      onTap: () {
+        //edit ur route
+        if (widget.editRoute == true) {
+        }
+
+        //view others route
+        else {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => InfoRouteView(
+                date: formattedDateFull,
+                destination: widget.destination,
+                location: widget.location,
+                seats: widget.seats,
+                userName: widget.userName,
+                userPfp: widget.pfp,
+                userID: widget.userID,
+              ),
+            ),
+          );
+        }
+      },
       child: Container(
         margin: const EdgeInsets.fromLTRB(15, 7, 15, 7),
         decoration: BoxDecoration(
@@ -99,7 +114,9 @@ class _CalatorieItemState extends State<CalatorieItem> {
                     child: CircleAvatar(
                       radius: 28,
                       backgroundColor: const Color.fromARGB(255, 200, 200, 200),
-                      backgroundImage: AssetImage(widget.pfp),
+                      backgroundImage: defaultAvatar == widget.pfp
+                          ? AssetImage(widget.pfp)
+                          : FileImage(File(widget.pfp)) as ImageProvider,
                     ),
                   ),
                 ),
