@@ -8,10 +8,12 @@ import '../forms/searchfield_form.dart';
 class SearchBox extends StatefulWidget {
   final String functionName;
   final String textLabel;
+  final String icon;
   final Text? textAbove;
   const SearchBox({
     super.key,
     this.textAbove,
+    required this.icon,
     required this.functionName,
     required this.textLabel,
   });
@@ -84,13 +86,14 @@ class _SearchBoxState extends State<SearchBox> {
                 height: 5,
               ),
               //start location form
-              searchfieldForm(_startLocation, _formKey1, 'pornire'),
+              searchfieldForm(_startLocation, _formKey1, 'pornire', Icons.home),
               const SizedBox(
                 height: 10,
               ),
 
               //final location form
-              searchfieldForm(_endLocation, _formKey2, 'destinația'),
+              searchfieldForm(
+                  _endLocation, _formKey2, 'destinația', Icons.location_pin),
               const SizedBox(
                 height: 10,
               ),

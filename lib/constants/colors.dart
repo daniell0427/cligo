@@ -7,5 +7,6 @@ class Pallete {
   static const colorDim3 = Color.fromRGBO(0, 126, 138, 1);
   static const colorDim4 = Color.fromARGB(255, 14, 54, 79);
   static const colorGray = Color.fromARGB(255, 170, 206, 206);
+  static const colorLightBlue = Color.fromARGB(255, 208, 255, 255);
   static const textColor = colorDim4;
 }

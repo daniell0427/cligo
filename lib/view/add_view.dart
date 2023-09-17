@@ -42,9 +42,9 @@ class _AddViewState extends State<AddView> {
 
     return Container(
       color: Pallete.colorDim0,
-      child: const Padding(
-        padding: EdgeInsets.only(
-          top: 80.0,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          top: 60.0,
           bottom: 5.0,
           left: 10.0,
           right: 10.0,
@@ -52,15 +52,29 @@ class _AddViewState extends State<AddView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              'Adaugă o rută',
-              style: TextStyle(
-                fontSize: 40,
-                color: Pallete.colorDim4,
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              decoration: BoxDecoration(
+                  color: Pallete.colorLightBlue,
+                  border: Border.all(width: 2, color: Pallete.colorDim3),
+                  borderRadius: BorderRadius.circular(10)),
+              child: const Center(
+                child: Text(
+                  'Adaugă o rută',
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Pallete.colorDim3,
+                  ),
+                ),
               ),
             ),
             //searchbox
-            SearchBox(textLabel: 'Adaugă', functionName: 'pushToDatabase'),
+            const SearchBox(
+                textLabel: 'Adaugă',
+                functionName: 'pushToDatabase',
+                icon: 'Icons.home'),
           ],
         ),
       ),
