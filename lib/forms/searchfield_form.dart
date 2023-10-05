@@ -4,7 +4,7 @@ import '../constants/list_of_countries_and_cities.dart' as mylist;
 import '../features/my_functions.dart';
 import 'package:cligo/constants/colors.dart';
 
-searchfieldForm(controllerValue, formkey, myLabelText) {
+searchfieldForm(controllerValue, formkey, myLabelText, icon) {
   return Form(
       key: formkey,
       child: Container(
@@ -38,7 +38,7 @@ searchfieldForm(controllerValue, formkey, myLabelText) {
           },
           maxSuggestionsInViewPort: 5,
           searchInputDecoration: InputDecoration(
-            prefixIcon: const Icon(Icons.location_pin),
+            prefixIcon: Icon(icon),
             prefixIconColor: Pallete.colorDim4,
             filled: true,
             fillColor: Colors.transparent,

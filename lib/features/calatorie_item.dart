@@ -148,29 +148,61 @@ class _CalatorieItemState extends State<CalatorieItem> {
             Column(
               children: [
                 //location and destination text
+                // Container(
+                //   constraints: const BoxConstraints(maxWidth: 220),
+                //   child: FittedBox(
+                //     fit: BoxFit.scaleDown,
+                //     child: SingleChildScrollView(
+                //       scrollDirection: Axis.horizontal,
+                //       child: Align(
+                //         alignment: Alignment.center,
+                //         child: Text(
+                //           "${widget.location} - ${widget.destination}",
+                //           style: const TextStyle(
+                //               fontWeight: FontWeight.bold,
+                //               fontSize: 24,
+                //               color: Pallete.textColor),
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 Container(
-                  constraints: const BoxConstraints(maxWidth: 220),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
+                  constraints: const BoxConstraints(maxWidth: 160),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text(
-                        "${widget.location} - ${widget.destination}",
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                            color: Pallete.textColor),
+                      child: Column(
+                        //crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.location,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Pallete.textColor),
+                          ),
+                          const Icon(Icons.arrow_drop_down_outlined),
+                          // Container(
+                          //   margin: const EdgeInsets.fromLTRB(0, 2, 0, 2),
+                          //   width: 5,
+                          //   height: 5,
+                          //   decoration: const BoxDecoration(
+                          //     shape: BoxShape.circle,
+                          //     color: Pallete.colorDim4,
+                          //   ),
+                          // ),
+                          Text(
+                            widget.destination,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Pallete.textColor),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ),
-
-                //number of seats
-                Text(
-                  '${widget.seats} locuri',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Pallete.textColor,
                   ),
                 ),
               ],
@@ -187,16 +219,29 @@ class _CalatorieItemState extends State<CalatorieItem> {
                 child: Column(
                   children: [
                     Text(
-                      dateSplitted[0],
+                      dateSplitted[0] +
+                          dateSplitted[1]
+                              .substring(0, dateSplitted[1].length - 1),
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 24,
+                          fontSize: 20,
                           color: Pallete.textColor),
                     ),
+                    // Text(
+                    //   dateSplitted[1].substring(0, dateSplitted[1].length - 1),
+                    //   style: const TextStyle(
+                    //       fontSize: 16, color: Pallete.textColor),
+                    // ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    //number of seats
                     Text(
-                      dateSplitted[1].substring(0, dateSplitted[1].length - 1),
+                      '${widget.seats} locuri',
                       style: const TextStyle(
-                          fontSize: 16, color: Pallete.textColor),
+                        fontSize: 16,
+                        color: Pallete.textColor,
+                      ),
                     ),
                   ],
                 ),

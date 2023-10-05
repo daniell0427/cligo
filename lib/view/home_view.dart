@@ -45,10 +45,11 @@ class _HomeViewState extends State<HomeView> {
                       //   width: 2,
                       // )
                     ),
-                    child: const SearchBox(
+                    child: SearchBox(
                       textLabel: 'Caută',
                       functionName: 'takeFromDatabase',
                       textAbove: textAbove,
+                      icon: 'Icons.home',
                     ),
                   ),
 

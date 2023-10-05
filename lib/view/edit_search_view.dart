@@ -26,7 +26,10 @@ class _EditSearchViewState extends State<EditSearchView> {
       body: Container(
         color: Pallete.colorDim0,
         child: const Column(children: [
-          SearchBox(functionName: 'takeFromDatabase', textLabel: 'Schimbă')
+          SearchBox(
+              functionName: 'takeFromDatabase',
+              textLabel: 'Schimbă',
+              icon: 'Icons.home')
         ]),
       ),
     );

@@ -459,87 +459,87 @@ class _ProfileViewState extends State<ProfileView> {
             ),
 
             //update photo
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              width: ScreenSize(context).width,
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 208, 255, 255),
-                  border: Border.all(
-                    color: Pallete.colorDim4,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(10)),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.image_outlined,
-                      color: Pallete.colorDim4,
-                      size: 35,
-                    ),
-                    TextButton(
-                      onPressed: () async {
-                        await choosePhoto(ImageSource.gallery);
+            GestureDetector(
+              onTap: () async {
+                await choosePhoto(ImageSource.gallery);
 
-                        //close modal
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
+                //close modal
+                Navigator.pop(context);
+              },
+              child: Container(
+                margin: const EdgeInsets.only(top: 10),
+                width: ScreenSize(context).width,
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 208, 255, 255),
+                    border: Border.all(
+                      color: Pallete.colorDim4,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(10)),
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.image_outlined,
+                        color: Pallete.colorDim4,
+                        size: 35,
+                      ),
+                      Text(
                         'Actualizează poza',
                         style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25,
-                        ),
+                            color: Pallete.colorDim4,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
 
             //remove photo
-            Container(
-              width: ScreenSize(context).width,
-              //height: 40,
-              margin: const EdgeInsets.only(top: 10),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(51, 236, 46, 46),
-                border: Border.all(
-                  color: Color.fromARGB(255, 255, 17, 0),
-                  width: 2,
+            GestureDetector(
+              onTap: () async {
+                //close modal
+                Navigator.pop(context);
+
+                await fireauth.currentUser?.updatePhotoURL(defaultAvatar);
+
+                //refresh page
+                setState(() {});
+              },
+              child: Container(
+                width: ScreenSize(context).width,
+                //height: 40,
+                margin: const EdgeInsets.only(top: 10),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(51, 236, 46, 46),
+                  border: Border.all(
+                    color: const Color.fromARGB(255, 255, 17, 0),
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.delete_outline,
-                      color: Color.fromARGB(255, 255, 17, 0),
-                      size: 35,
-                    ),
-                    TextButton(
-                      onPressed: () async {
-                        //close modal
-                        Navigator.pop(context);
-
-                        await fireauth.currentUser
-                            ?.updatePhotoURL(defaultAvatar);
-
-                        //refresh page
-                        setState(() {});
-                      },
-                      child: const Text(
+                child: const Padding(
+                  padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.delete_outline,
+                        color: Color.fromARGB(255, 255, 17, 0),
+                        size: 35,
+                      ),
+                      Text(
                         'Șterge poza',
                         style: TextStyle(
                           color: Color.fromARGB(255, 255, 17, 0),
                           fontSize: 25,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

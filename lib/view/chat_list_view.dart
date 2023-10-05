@@ -63,7 +63,7 @@ class _ChatListViewState extends State<ChatListView> {
           decoration: const BoxDecoration(
               border: Border(
             bottom: BorderSide(
-              color: Pallete.colorDim4,
+              color: Pallete.colorLightBlue,
               width: 2.0,
             ),
           )),
