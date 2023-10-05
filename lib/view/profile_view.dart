@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cligo/constants/images.dart';
@@ -5,6 +6,7 @@ import 'package:cligo/constants/variables.dart';
 import 'package:cligo/database/services/route_service.dart';
 import 'package:cligo/features/screen_size.dart';
 import 'package:cligo/view/my_routes.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -30,7 +32,7 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  late PickedFile _imageFile;
+  String imageURL = '';
   final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
@@ -120,9 +122,9 @@ class _ProfileViewState extends State<ProfileView> {
                               GestureDetector(
                                 child: CircleAvatar(
                                     radius: 40,
-                                    backgroundImage: defaultAvatar == currentPfp
-                                        ? AssetImage(currentPfp)
-                                        : FileImage(File(currentPfp))
+                                    backgroundImage: currentPfp != defaultAvatar
+                                        ? NetworkImage(currentPfp)
+                                        : AssetImage(defaultAvatar)
                                             as ImageProvider),
                                 onTap: () async {
                                   //show bottomsheet
@@ -138,11 +140,11 @@ class _ProfileViewState extends State<ProfileView> {
 
                                   //update photo
                                   await fireauth.currentUser
-                                      ?.updatePhotoURL(_imageFile.path);
+                                      ?.updatePhotoURL(imageURL);
                                   await firestore
                                       .collection('user')
                                       .doc(currentUserID)
-                                      .update({'pfp': _imageFile.path});
+                                      .update({'pfp': imageURL});
 
                                   //refresh page
                                   setState(() {});
@@ -158,7 +160,6 @@ class _ProfileViewState extends State<ProfileView> {
                                         .collection('routes')
                                         .doc(id)
                                         .update({'sender_pfp': currentPfp});
-                                    print(currentPfp);
                                   }
                                 },
                               ),
@@ -402,8 +403,9 @@ class _ProfileViewState extends State<ProfileView> {
                           SizedBox(
                             width: 100,
                             child: Ink.image(
-                              image: AssetImage(
-                                  widget.userPfp ?? defaultAvatar), //pfp
+                              image:
+                                  AssetImage(widget.userPfp ?? defaultAvatar)
+                                      as ImageProvider, //pfp
                               height: 70,
                               width: 70,
                             ),
@@ -444,8 +446,8 @@ class _ProfileViewState extends State<ProfileView> {
             CircleAvatar(
               radius: 60,
               backgroundImage: currentPfp != defaultAvatar
-                  ? FileImage(File(currentPfp))
-                  : AssetImage(currentPfp) as ImageProvider,
+                  ? NetworkImage(currentPfp)
+                  : AssetImage(defaultAvatar) as ImageProvider,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 5),
@@ -549,9 +551,18 @@ class _ProfileViewState extends State<ProfileView> {
 
   Future choosePhoto(ImageSource source) async {
     final pickedFile = await _picker.pickImage(source: source);
+    final fileImage = File(pickedFile!.path);
+    String uniqueName = DateTime.now().microsecondsSinceEpoch.toString();
+    final path = 'images/$uniqueName';
 
-    setState(() {
-      _imageFile = PickedFile(pickedFile!.path);
-    });
+    Reference ref = storage.ref().child(path);
+
+    try {
+      await ref.putFile(fileImage);
+      imageURL = await ref.getDownloadURL();
+      setState(() {});
+    } catch (error) {
+      print(error);
+    }
   }
 }

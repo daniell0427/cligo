@@ -45,7 +45,7 @@ class _InfoRouteViewState extends State<InfoRouteView> {
             //profile picture
             CircleAvatar(
               radius: ScreenSize(context).width * 0.20,
-              backgroundImage: AssetImage(widget.userPfp),
+              backgroundImage: AssetImage(widget.userPfp) as ImageProvider,
               backgroundColor: Pallete.colorGray,
             ),
             // SizedBox(

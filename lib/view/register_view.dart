@@ -55,10 +55,10 @@ class _RegisterState extends State<Register> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CircleAvatar(
+                   CircleAvatar(
                     radius: 60,
                     backgroundColor: Colors.transparent,
-                    backgroundImage: AssetImage(placeHolderLogo),
+                    backgroundImage: AssetImage(placeHolderLogo) as ImageProvider,
                   ),
 
                   //!Title

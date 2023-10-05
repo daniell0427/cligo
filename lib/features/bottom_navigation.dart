@@ -6,7 +6,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:cligo/constants/colors.dart';
 
 class BottomNavigation extends StatefulWidget {
-  const BottomNavigation({Key? key});
+  const BottomNavigation({super.key});
 
   @override
   State<BottomNavigation> createState() => _BottomNavigationState();

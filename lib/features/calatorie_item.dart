@@ -112,12 +112,12 @@ class _CalatorieItemState extends State<CalatorieItem> {
 
                     //profile picture
                     child: CircleAvatar(
-                      radius: 28,
-                      backgroundColor: const Color.fromARGB(255, 200, 200, 200),
-                      backgroundImage: defaultAvatar == widget.pfp
-                          ? AssetImage(widget.pfp)
-                          : FileImage(File(widget.pfp)) as ImageProvider,
-                    ),
+                        radius: 28,
+                        backgroundColor:
+                            const Color.fromARGB(255, 200, 200, 200),
+                        backgroundImage: widget.pfp != defaultAvatar
+                            ? NetworkImage(widget.pfp)
+                            : AssetImage(defaultAvatar) as ImageProvider),
                   ),
                 ),
 
