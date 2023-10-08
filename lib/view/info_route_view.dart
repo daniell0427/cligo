@@ -3,6 +3,7 @@ import 'package:cligo/view/profile_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cligo/constants/colors.dart';
+import '../constants/images.dart';
 import 'chat_view.dart';
 
 class InfoRouteView extends StatefulWidget {
@@ -45,7 +46,9 @@ class _InfoRouteViewState extends State<InfoRouteView> {
             //profile picture
             CircleAvatar(
               radius: ScreenSize(context).width * 0.20,
-              backgroundImage: AssetImage(widget.userPfp) as ImageProvider,
+              backgroundImage: widget.userPfp != defaultAvatar
+                  ? NetworkImage(widget.userPfp)
+                  : const AssetImage(defaultAvatar) as ImageProvider,
               backgroundColor: Pallete.colorGray,
             ),
             // SizedBox(

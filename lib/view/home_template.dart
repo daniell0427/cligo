@@ -32,18 +32,18 @@ class _HomeViewState extends State<HomeView> {
         //   ),
         // ),
         leadingWidth: 150,
-        leading:  Padding(
-          padding: const EdgeInsets.only(left: 8.0),
+        leading: const Padding(
+          padding: EdgeInsets.only(left: 8.0),
           child: Row(
             children: [
               Flexible(
                 child: CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage(placeHolderLogo) as ImageProvider,
+                  backgroundImage: AssetImage(placeHolderLogo),
                   backgroundColor: Colors.transparent,
                 ),
               ),
-              const Flexible(
+               Flexible(
                 child: Text(
                   'Cligo',
                   style: TextStyle(fontSize: 25),

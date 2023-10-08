@@ -47,10 +47,10 @@ class _LoginState extends State<Login> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 //!Logo
-                 CircleAvatar(
+                 const CircleAvatar(
                   radius: 60,
                   backgroundColor: Colors.transparent,
-                  backgroundImage: AssetImage(placeHolderLogo) as ImageProvider,
+                  backgroundImage: AssetImage(placeHolderLogo),
                 ),
                 //!title
                 const Text(

@@ -45,7 +45,7 @@ class _HomeViewState extends State<HomeView> {
                       //   width: 2,
                       // )
                     ),
-                    child: SearchBox(
+                    child: const SearchBox(
                       textLabel: 'Caută',
                       functionName: 'takeFromDatabase',
                       textAbove: textAbove,

@@ -287,7 +287,7 @@ class _ChatViewState extends State<ChatView> {
               padding: paddingSide,
               child: ConstrainedBox(
                 constraints: const BoxConstraints(
-                    maxWidth: 320), //TODO: change relative to screen width
+                    maxWidth: 320),  //TODO: change relative to screen width
                 child: IntrinsicWidth(
                   child: Container(
                     //width: ,

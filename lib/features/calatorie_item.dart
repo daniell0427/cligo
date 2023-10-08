@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:cligo/view/info_route_view.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:cligo/constants/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import '../constants/images.dart';
 
 class CalatorieItem extends StatefulWidget {
   final String pfp;
@@ -112,12 +110,10 @@ class _CalatorieItemState extends State<CalatorieItem> {
 
                     //profile picture
                     child: CircleAvatar(
-                        radius: 28,
-                        backgroundColor:
-                            const Color.fromARGB(255, 200, 200, 200),
-                        backgroundImage: widget.pfp != defaultAvatar
-                            ? NetworkImage(widget.pfp)
-                            : AssetImage(defaultAvatar) as ImageProvider),
+                      radius: 28,
+                      backgroundColor: const Color.fromARGB(255, 200, 200, 200),
+                      backgroundImage: NetworkImage(widget.pfp),
+                    ),
                   ),
                 ),
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cligo/constants/images.dart';
 import 'package:cligo/constants/variables.dart';
 import 'package:cligo/view/chat_view.dart';
@@ -54,7 +56,7 @@ class _ChatListViewState extends State<ChatListView> {
   Widget createListView(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
     var pfp = data['pfp'];
-    print(pfp);
+    log(pfp);
     //display users without current user
     if (currentUserEmail != data['email']) {
       return ListTile(
@@ -86,7 +88,7 @@ class _ChatListViewState extends State<ChatListView> {
                       backgroundColor: const Color.fromARGB(255, 200, 200, 200),
                       backgroundImage: pfp != defaultAvatar
                           ? NetworkImage(pfp)
-                          : AssetImage(defaultAvatar) as ImageProvider,
+                          : const AssetImage(defaultAvatar) as ImageProvider,
                     ),
                   ),
                 ),

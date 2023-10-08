@@ -7,7 +7,6 @@ FirebaseAuth fireauth = FirebaseAuth.instance;
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 FirebaseStorage storage = FirebaseStorage.instance;
 
-
 //user variables
 User? currentUser;
 late String currentUserID;

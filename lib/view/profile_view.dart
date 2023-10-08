@@ -1,11 +1,11 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:cligo/constants/images.dart';
 import 'package:cligo/constants/variables.dart';
 import 'package:cligo/database/services/route_service.dart';
 import 'package:cligo/features/screen_size.dart';
+import 'package:cligo/view/account_details.dart';
 import 'package:cligo/view/my_routes.dart';
+import 'package:cligo/view/settings_view.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,10 +36,6 @@ class _ProfileViewState extends State<ProfileView> {
   final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
-    //get screen size
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-
     //get variables
     variables();
 
@@ -124,7 +120,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     radius: 40,
                                     backgroundImage: currentPfp != defaultAvatar
                                         ? NetworkImage(currentPfp)
-                                        : AssetImage(defaultAvatar)
+                                        : const AssetImage(defaultAvatar)
                                             as ImageProvider),
                                 onTap: () async {
                                   //show bottomsheet
@@ -185,7 +181,7 @@ class _ProfileViewState extends State<ProfileView> {
             //the line blow name
             SizedBox(
               height: 2,
-              width: screenWidth,
+              width: ScreenSize(context).width,
               child: Container(color: const Color.fromARGB(182, 4, 34, 53)),
             ),
 
@@ -193,8 +189,8 @@ class _ProfileViewState extends State<ProfileView> {
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: SizedBox(
-                width: screenWidth,
-                height: screenHeight * 0.08,
+                width: ScreenSize(context).width,
+                height: ScreenSize(context).height * 0.08,
                 child: TextButton(
                   style: const ButtonStyle(
                     alignment: Alignment.centerLeft,
@@ -237,13 +233,17 @@ class _ProfileViewState extends State<ProfileView> {
             Padding(
               padding: const EdgeInsets.only(top: 0),
               child: SizedBox(
-                width: screenWidth,
-                height: screenHeight * 0.08,
+                width: ScreenSize(context).width,
+                height: ScreenSize(context).height * 0.08,
                 child: TextButton(
                   style: const ButtonStyle(
                     alignment: Alignment.centerLeft,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(CupertinoPageRoute(
+                      builder: (context) => const SettingsView(),
+                    ));
+                  },
                   child: const Row(
                     children: [
                       Icon(
@@ -266,13 +266,19 @@ class _ProfileViewState extends State<ProfileView> {
 
             //account details
             SizedBox(
-              width: screenWidth,
-              height: screenHeight * 0.08,
+              width: ScreenSize(context).width,
+              height: ScreenSize(context).height * 0.08,
               child: TextButton(
                 style: const ButtonStyle(
                   alignment: Alignment.centerLeft,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    CupertinoPageRoute(
+                      builder: (context) => const AccountDetailsView(),
+                    ),
+                  );
+                },
                 child: const Row(
                   children: [
                     Icon(
@@ -294,8 +300,8 @@ class _ProfileViewState extends State<ProfileView> {
 
             //logout button
             SizedBox(
-              width: screenWidth,
-              height: screenHeight * 0.08,
+              width: ScreenSize(context).width,
+              height: ScreenSize(context).height * 0.08,
               child: TextButton(
                 style: const ButtonStyle(
                   alignment: Alignment.centerLeft,
@@ -400,16 +406,12 @@ class _ProfileViewState extends State<ProfileView> {
                       child: Align(
                         alignment: Alignment.topRight,
                         child: Stack(children: <Widget>[
-                          SizedBox(
-                            width: 100,
-                            child: Ink.image(
-                              image:
-                                  AssetImage(widget.userPfp ?? defaultAvatar)
-                                      as ImageProvider, //pfp
-                              height: 70,
-                              width: 70,
-                            ),
-                          ),
+                          CircleAvatar(
+                              radius: 40,
+                              backgroundImage: widget.userPfp != defaultAvatar
+                                  ? NetworkImage(widget.userPfp!)
+                                  : const AssetImage(defaultAvatar)
+                                      as ImageProvider),
                         ]),
                       ),
                     ),
@@ -421,7 +423,7 @@ class _ProfileViewState extends State<ProfileView> {
             //the line blow name
             SizedBox(
               height: 2,
-              width: screenWidth,
+              width: ScreenSize(context).width,
               child: Container(color: const Color.fromARGB(182, 4, 34, 53)),
             ),
           ],
@@ -447,7 +449,7 @@ class _ProfileViewState extends State<ProfileView> {
               radius: 60,
               backgroundImage: currentPfp != defaultAvatar
                   ? NetworkImage(currentPfp)
-                  : AssetImage(defaultAvatar) as ImageProvider,
+                  : const AssetImage(defaultAvatar) as ImageProvider,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 5),
