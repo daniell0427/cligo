@@ -1,16 +1,7 @@
-# cligo
+This project was an attempt to make a running Android application
+This is a carpooling app, with a lot of potential, and a lot more work to be put into
 
-Danu coding goes round and round. The Danu coding goes round and round
+The app is fully functional (with some minor bugs) and open for anyone to try
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Our team comprised 3 people: one for backend, one for frontend, and one for marketing strategies.
+Unfortunately, we abandoned the project because we went to different locations.
